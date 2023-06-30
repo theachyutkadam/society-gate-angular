@@ -17,7 +17,7 @@ import { ComponentsModule } from './components/components.module';
 @NgModule({
   declarations: [
     AppComponent,
-    FullComponent
+    FullComponent,
   ],
   imports: [
     BrowserModule,
@@ -27,7 +27,7 @@ import { ComponentsModule } from './components/components.module';
     DemoFlexyModule,
     DashboardModule,
     ComponentsModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
