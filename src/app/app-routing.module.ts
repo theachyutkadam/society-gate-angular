@@ -19,6 +19,7 @@ import { TabsComponent } from './components/default/tabs/tabs.component';
 import { ToolbarComponent } from './components/default/toolbar/toolbar.component';
 import { TooltipsComponent } from './components/default/tooltips/tooltips.component';
 import { UserIndexComponent } from './components/pages/users/index/user-index.component';
+import { UserFormComponent } from './components/pages/users/user-form/user-form.component';
 
 const routes: Routes = [
   {
@@ -45,12 +46,13 @@ const routes: Routes = [
       {path:"button", component:ButtonsComponent},
       // paegs
       {path:"users", component:UserIndexComponent},
+      {path:"user-form", component:UserFormComponent},
 
     ]
   },
 
   {path:"", redirectTo:"/home", pathMatch:"full"},
-  {path:"**", redirectTo:"/home", pathMatch:"full"},
+  // {path:"**", redirectTo:"/home", pathMatch:"full"},
 ];
 
 @NgModule({

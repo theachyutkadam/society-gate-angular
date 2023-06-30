@@ -24,6 +24,7 @@ import { TooltipsComponent } from './default/tooltips/tooltips.component';
 // pages
 import { UserIndexComponent } from './pages/users/index/user-index.component';
 import { DashboardModule } from "../dashboard/dashboard.module";
+import { UserFormComponent } from './pages/users/user-form/user-form.component';
 
 @NgModule({
     declarations: [
@@ -43,6 +44,7 @@ import { DashboardModule } from "../dashboard/dashboard.module";
         ButtonsComponent,
         TooltipsComponent,
         UserIndexComponent,
+        UserFormComponent,
     ],
     exports: [
         AlertsComponent,

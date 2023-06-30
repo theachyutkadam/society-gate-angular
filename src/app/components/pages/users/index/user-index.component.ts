@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { HttpServices } from 'src/app/connections/services/http-services';
 
 @Component({
@@ -16,7 +17,7 @@ export class UserIndexComponent implements OnInit {
   users: any;
   dataSource: any;
 
-  constructor(private _http: HttpServices) { }
+  constructor(private router: Router, private _http: HttpServices) { }
 
   ngOnInit(): void {
     this.getUserInformations()
@@ -51,5 +52,11 @@ export class UserIndexComponent implements OnInit {
       return "btn-danger"
     }
     return "btn-primary"
+  }
+
+  setUser(user:any){
+    console.log('Check--->', user);
+    sessionStorage.setItem('user_id', user)
+    this.router.navigateByUrl('/user-form')
   }
 }

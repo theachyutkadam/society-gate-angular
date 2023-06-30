@@ -3,7 +3,9 @@
 <!-- Daily Activity -->
 <mat-card class="w-100">
   <mat-card-content>
-    <h4 class="mb-56">Users</h4>
+    <h4 class="mb-56">Users
+      <h4 class="example-spacer">New</h4>
+    </h4>
 
     <div class="table-responsive">
       <table mat-table [dataSource]="dataSource" class="text-nowrap w-100">
@@ -11,10 +13,10 @@
         <!-- Id Column -->
         <ng-container matColumnDef="id">
           <th mat-header-cell *matHeaderCellDef> Id </th>
-          <td mat-cell class="fw-medium" *matCellDef="let element"> {{element.id}} </td>
+          <td mat-cell class="fw-medium" *matCellDef="let element"> <a routerLink="" (click)="setUser(element.id)"> {{element.id}} </a></td>
         </ng-container>
 
-        <!-- Assigned Column -->
+        <!-- User_Details Column -->
         <ng-container matColumnDef="user_details">
           <th mat-header-cell *matHeaderCellDef> User Details </th>
           <td mat-cell *matCellDef="let element">
@@ -23,15 +25,7 @@
           </td>
         </ng-container>
 
-        <!-- Project Column -->
-        <!-- <ng-container matColumnDef="email">
-          <th mat-header-cell *matHeaderCellDef> Email </th>
-          <td mat-cell *matCellDef="let element">
-            <p class="mb-0 fw-medium op-5">{{element.email}}</p>
-          </td>
-        </ng-container> -->
-
-        <!-- Priority Column -->
+        <!-- Status Column -->
         <ng-container matColumnDef="status">
           <th mat-header-cell *matHeaderCellDef> Status </th>
           <td mat-cell *matCellDef="let element">
@@ -39,7 +33,7 @@
           </td>
         </ng-container>
 
-        <!-- Budget Column -->
+        <!-- User_Type Column -->
         <ng-container matColumnDef="user_type">
           <th mat-header-cell *matHeaderCellDef> UserType </th>
           <td mat-cell *matCellDef="let element">
