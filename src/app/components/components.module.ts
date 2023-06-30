@@ -22,9 +22,7 @@ import { ToolbarComponent } from './default/toolbar/toolbar.component';
 import { TooltipsComponent } from './default/tooltips/tooltips.component';
 
 // pages
-import { UserIndexComponent } from './pages/users/index/index.component';
-import { UserShowComponent } from './pages/users/show/show.component';
-import { UserNewComponent } from './pages/users/new/new.component';
+import { UserIndexComponent } from './pages/users/index/user-index.component';
 import { DashboardModule } from "../dashboard/dashboard.module";
 
 @NgModule({
@@ -45,8 +43,6 @@ import { DashboardModule } from "../dashboard/dashboard.module";
         ButtonsComponent,
         TooltipsComponent,
         UserIndexComponent,
-        UserShowComponent,
-        UserNewComponent,
     ],
     exports: [
         AlertsComponent,
@@ -69,7 +65,8 @@ import { DashboardModule } from "../dashboard/dashboard.module";
         FeatherModule.pick(allIcons),
         DemoFlexyModule,
         FormsModule,
-        DashboardModule
+        DashboardModule,
+        
     ]
 })
 export class ComponentsModule { }

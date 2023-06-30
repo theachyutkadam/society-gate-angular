@@ -18,6 +18,7 @@ import { SnackbarComponent } from './components/default/snackbar/snackbar.compon
 import { TabsComponent } from './components/default/tabs/tabs.component';
 import { ToolbarComponent } from './components/default/toolbar/toolbar.component';
 import { TooltipsComponent } from './components/default/tooltips/tooltips.component';
+import { UserIndexComponent } from './components/pages/users/index/user-index.component';
 
 const routes: Routes = [
   {
@@ -42,6 +43,9 @@ const routes: Routes = [
       {path:"slide-toggle", component:SlideToggleComponent},
       {path:"tooltip", component:TooltipsComponent},
       {path:"button", component:ButtonsComponent},
+      // paegs
+      {path:"users", component:UserIndexComponent},
+
     ]
   },
 
