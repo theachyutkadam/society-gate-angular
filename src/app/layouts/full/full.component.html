@@ -29,7 +29,7 @@
 
   <mat-sidenav-content>
     <!-- Header -->
-    <mat-toolbar class="header ps-24 pe-24">
+    <mat-toolbar class="header ps-24 pe-24 set-height">
       <button type="button" class="ms-4" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
         *ngIf="isHandset$ | async">
         <i-feather name="menu" class="text-light-muted feather-base mt-n3"></i-feather>
@@ -63,11 +63,11 @@
     </mat-toolbar>
 
     <!-- Content -->
-    <div class="body-wrapper">
+    <!-- <div class="body-wrapper"> -->
       <div class="page-wrapper">
         <router-outlet></router-outlet>
       </div>
-    </div>
+    <!-- </div> -->
 
     <!-- <p class="text-center pb-24 fs-16">© 2022 All rights reserved by <a
         href="https://www.wrappixel.com/templates/category/free-angular-templates/" target="_blank"
