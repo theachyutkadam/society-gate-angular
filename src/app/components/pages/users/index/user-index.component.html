@@ -14,7 +14,7 @@
 
           <ng-container matColumnDef="id">
             <th mat-header-cell *matHeaderCellDef> Id </th>
-            <td mat-cell class="fw-medium" *matCellDef="let element"> <a href="" (click)="setUser(element.id)"> {{element.id}} </a></td>
+            <td mat-cell class="fw-medium" *matCellDef="let element"> <a (click)="setUser(element.id)"> {{element.id}} </a></td>
           </ng-container>
 
           <!-- User_Details Column -->
@@ -55,7 +55,7 @@
       [pageSize]="perPage"
       [pageSizeOptions]="[5, 10, 25]"
       [showFirstLastButtons]="true"
-      [length]="totalPages"
+      [length]="totalCount"
       [pageIndex]="currentPage"
       (page)="changePage($event)">
     </mat-paginator>

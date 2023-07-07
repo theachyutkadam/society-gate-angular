@@ -10,7 +10,6 @@ import { HttpServices } from 'src/app/connections/services/http-services';
   viewProviders: [MatExpansionPanel]
 })
 export class UserFormComponent implements OnInit {
-
   checked = true;
   user_information: any;
 
@@ -21,11 +20,10 @@ export class UserFormComponent implements OnInit {
   }
 
   getUserInformations() {
-    debugger
     const user_information_id = sessionStorage.getItem("user_id")
     const url = `user_informations/${user_information_id}`
-    this._http.get(url, '').subscribe((response: any) => {
-        console.warn("user_info", response)
+    this._http.get(url)
+      .subscribe((response: any) => {
         this.user_information = response
       },
       err => {

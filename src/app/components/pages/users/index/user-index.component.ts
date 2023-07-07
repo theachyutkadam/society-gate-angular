@@ -12,18 +12,13 @@ import { HttpServices } from 'src/app/connections/services/http-services';
 
 export class UserIndexComponent implements OnInit {
   displayedColumns: string[] = ['id', 'user_details', 'status', 'user_type'];
-  users: any;
+  // users: any;
   dataSource: any;
-
-  public array: any;
-  // public displayedColumns = ['', '', '', '', ''];
-  // public dataSource: any;
 
   public perPage = 10;
   public currentPage = 0;
   public totalCount = 0;
   public totalPages = 0;
-
 
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
 
