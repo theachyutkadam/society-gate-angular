@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { HttpServices } from 'src/app/connections/services/http-services';
@@ -9,28 +10,42 @@ import { HttpServices } from 'src/app/connections/services/http-services';
   styleUrls: ['./user-index.component.scss']
 })
 
-// enum status: { active: 0, pending: 1, blocked: 2, deleted: 3 }, _default: "active"
-// enum user_type: { admin: 0, owner: 1, tenant: 2 }, _default: "owner"
-
 export class UserIndexComponent implements OnInit {
   displayedColumns: string[] = ['id', 'user_details', 'status', 'user_type'];
   users: any;
   dataSource: any;
 
+  public array: any;
+  // public displayedColumns = ['', '', '', '', ''];
+  // public dataSource: any;
+
+  public perPage = 10;
+  public currentPage = 0;
+  public totalCount = 0;
+  public totalPages = 0;
+
+
+  @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
+
   constructor(private router: Router, private _http: HttpServices) { }
 
   ngOnInit(): void {
-    this.getUserInformations()
+    this.getUsers()
   }
 
-  getUserInformations() {
-    this._http.get('users')
+  getUsers(per_page: number = 10, current_page: number = 0) {
+    let params = [
+      { key: "page", value: current_page},
+      { key: "per_page", value: per_page }
+    ]
+    this._http.get('users', params)
     .subscribe(
       (response: any) => {
-        console.warn("##############")
         console.warn("response", response)
-        console.warn("##############")
-        this.dataSource = new MatTableDataSource<any>(response);
+
+        this.dataSource = new MatTableDataSource<any>(response['users']);
+        this.totalCount = response['total_count']
+        this.totalPages = response['total_pages']
       },
       err => {
         console.log(err);
@@ -55,8 +70,13 @@ export class UserIndexComponent implements OnInit {
   }
 
   setUser(user:any){
-    console.log('Check--->', user);
     sessionStorage.setItem('user_id', user)
     this.router.navigateByUrl('/user-form')
+  }
+
+  // Handle pagination
+  changePage(event: PageEvent) {
+    console.log('Check--->', event);
+    this.getUsers(event.pageSize, event.pageIndex)
   }
 }

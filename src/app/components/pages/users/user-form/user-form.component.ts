@@ -21,10 +21,10 @@ export class UserFormComponent implements OnInit {
   }
 
   getUserInformations() {
+    debugger
     const user_information_id = sessionStorage.getItem("user_id")
-    this._http.get(`user_informations/${user_information_id}`)
-    .subscribe(
-      (response: any) => {
+    const url = `user_informations/${user_information_id}`
+    this._http.get(url, '').subscribe((response: any) => {
         console.warn("user_info", response)
         this.user_information = response
       },
@@ -35,7 +35,6 @@ export class UserFormComponent implements OnInit {
   }
 
   onSave(event:any): void {
-    // this.router.navigate(['/flexy/home']);
   }
 
   onBack(){
