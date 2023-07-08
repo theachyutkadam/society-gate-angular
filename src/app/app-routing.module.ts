@@ -20,6 +20,7 @@ import { ToolbarComponent } from './components/default/toolbar/toolbar.component
 import { TooltipsComponent } from './components/default/tooltips/tooltips.component';
 import { UserIndexComponent } from './components/pages/users/index/user-index.component';
 import { UserFormComponent } from './components/pages/users/user-form/user-form.component';
+import { LoginComponent } from './components/pages/login/login.component';
 
 const routes: Routes = [
   {
@@ -47,6 +48,7 @@ const routes: Routes = [
       // paegs
       {path:"users", component:UserIndexComponent},
       {path:"user-form", component:UserFormComponent},
+      {path:"login", component:LoginComponent},
 
     ]
   },

@@ -27,7 +27,7 @@ export class HttpServices {
     return this._http.get(`${api_base_url}${url}${converted_params}`, {headers: this.httpHeaderWithToken})
   }
 
-  postApi(url: any, obj: any){
+  post(url: any, obj: any){
     return this._http.post(`${api_base_url}${url}`, obj, {headers: this.httpHeaderWithToken})
   }
 
