@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
 
       if(response.status == 200){
         alert('Login Succesful');
-        sessionStorage.setItem('user_id', response.user)
+        sessionStorage.setItem('user_id', response.user_id)
         sessionStorage.setItem('auth_token', response.auth_token)
         sessionStorage.setItem('user_information_id', response.user_information_id)
         this.loginForm.reset()

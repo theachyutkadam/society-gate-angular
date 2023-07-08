@@ -21,6 +21,7 @@ import { TooltipsComponent } from './components/default/tooltips/tooltips.compon
 import { UserIndexComponent } from './components/pages/users/index/user-index.component';
 import { UserFormComponent } from './components/pages/users/user-form/user-form.component';
 import { LoginComponent } from './components/pages/login/login.component';
+import { LogoutComponent } from './components/pages/logout/logout.component';
 
 const routes: Routes = [
   {
@@ -49,7 +50,7 @@ const routes: Routes = [
       {path:"users", component:UserIndexComponent},
       {path:"user-form", component:UserFormComponent},
       {path:"login", component:LoginComponent},
-
+      {path:"logout", component:LogoutComponent},
     ]
   },
 

@@ -26,6 +26,7 @@ import { UserIndexComponent } from './pages/users/index/user-index.component';
 import { DashboardModule } from "../dashboard/dashboard.module";
 import { UserFormComponent } from './pages/users/user-form/user-form.component';
 import { LoginComponent } from './pages/login/login.component';
+import { LogoutComponent } from './pages/logout/logout.component';
 
 @NgModule({
     declarations: [
@@ -47,6 +48,7 @@ import { LoginComponent } from './pages/login/login.component';
         UserIndexComponent,
         UserFormComponent,
         LoginComponent,
+        LogoutComponent,
     ],
     exports: [
         AlertsComponent,
