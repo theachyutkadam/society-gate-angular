@@ -29,6 +29,9 @@ export class UserIndexComponent implements OnInit {
   }
 
   getUsers(per_page: number = 10, current_page: number = 0) {
+    if(current_page == 0){
+      current_page = 1
+    }
     let params = [
       { key: "page", value: current_page},
       { key: "per_page", value: per_page }
@@ -65,7 +68,7 @@ export class UserIndexComponent implements OnInit {
   }
 
   setUser(user:any){
-    sessionStorage.setItem('user_id', user)
+    sessionStorage.setItem('selected_user_id', user)
     this.router.navigateByUrl('/user-form')
   }
 

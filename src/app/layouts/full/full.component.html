@@ -43,12 +43,12 @@
         <button mat-button class="fs-16 pt-4 pb-4 ps-8 pe-8 text-light-muted" [matMenuTriggerFor]="menu">
           <img src="assets/images/user2.webp" class="rounded-circle" alt="">
           <span class="fw-light ms-8 text-secondary">Hi,</span>
-          <span class="fw-bold ms-8">Julia</span>
+          <span class="fw-bold ms-8">{{userDetails}}</span>
           <i-feather name="chevron-down" class="feather-base mt-n2"></i-feather>
         </button>
         <mat-menu #menu="matMenu" class="profile-dropdown">
           <div class="p-16 mb-4">
-            <button mat-menu-item class="fs-16">Edit Profile</button>
+            <button mat-menu-item class="fs-16" (click)="setUser(userInformationId)">Edit Profile</button>
             <button mat-menu-item class="fs-16">Account</button>
             <button mat-menu-item class="fs-16">Change Password</button>
             <button mat-menu-item class="fs-16">My Settings</button>
@@ -56,8 +56,7 @@
           <hr>
 
           <div class="p-16">
-            <!-- <button mat-button class="btn btn-info w-100" (onclick)="logoutUser()">Logout</button> -->
-            <a href="/logout">Logout</a>
+            <button mat-button class="btn btn-info w-100"><a href="/logout">Logout</a></button>
           </div>
 
         </mat-menu>

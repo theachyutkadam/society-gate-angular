@@ -16,6 +16,8 @@ interface sidebarMenu {
   styleUrls: ['./full.component.scss']
 })
 export class FullComponent {
+  userDetails = sessionStorage.getItem("userDetails")
+  userInformationId = sessionStorage.getItem("userInformationId")
 
   search: boolean = false;
   show_header = false;
@@ -35,6 +37,11 @@ export class FullComponent {
   }
 
   routerActive: string = "activelink";
+
+  setUser(user:any){
+    sessionStorage.setItem('selected_user_id', user)
+    this.router.navigateByUrl('/user-form')
+  }
 
   logoutUser(){
     console.log('Check logout link clicked--->');

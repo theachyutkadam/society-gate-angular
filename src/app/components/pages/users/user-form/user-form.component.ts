@@ -17,7 +17,7 @@ export class UserFormComponent implements OnInit {
   userInformationForm!: FormGroup
   is_handicap: boolean = false
   id = sessionStorage.getItem('userInformationId')
-  user_information_id = sessionStorage.getItem("user_id")
+  user_information_id = sessionStorage.getItem("selected_user_id")
 
   constructor(
     private router: Router,
@@ -70,7 +70,7 @@ export class UserFormComponent implements OnInit {
   }
 
   onBack(){
-    sessionStorage.setItem('user_id', "0")
+    sessionStorage.setItem('selected_user_id', "0")
     this.router.navigateByUrl('/users')
   }
 
@@ -97,6 +97,8 @@ export class UserFormComponent implements OnInit {
       console.warn("response", response)
 
       if(response.status == 200){
+        this.updateSessionUserDetails(response['full_name'], this.user_information_id)
+
         console.log('200--->', response);
         // this.router.navigateByUrl('/users')
       }else{
@@ -105,5 +107,11 @@ export class UserFormComponent implements OnInit {
     },err=>{
       console.log(err)
     })
+  }
+
+  updateSessionUserDetails(name: any, selected_user_id: any){
+    if(sessionStorage.getItem('userId') == selected_user_id){
+      sessionStorage.setItem('userDetails', name)
+    }
   }
 }

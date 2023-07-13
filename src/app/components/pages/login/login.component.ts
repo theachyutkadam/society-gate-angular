@@ -35,7 +35,8 @@ export class LoginComponent implements OnInit {
       console.warn("response", response)
 
       if(response.status == 200){
-        sessionStorage.setItem('userId', response.user_id)
+        sessionStorage.setItem('userDetails', response.user_details['full_name'])
+        sessionStorage.setItem('userId', response.user_details['user_id'])
         sessionStorage.setItem('authToken', response.auth_token)
         sessionStorage.setItem('userInformationId', response.user_information_id)
         this.loginForm.reset()
