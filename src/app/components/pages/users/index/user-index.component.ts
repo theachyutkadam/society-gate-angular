@@ -16,7 +16,7 @@ export class UserIndexComponent implements OnInit {
   dataSource: any;
 
   public perPage = 10;
-  public currentPage = 0;
+  public currentPage = 1;
   public totalCount = 0;
   public totalPages = 0;
 

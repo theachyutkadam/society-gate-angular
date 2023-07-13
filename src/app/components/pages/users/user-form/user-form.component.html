@@ -11,25 +11,25 @@
       </mat-expansion-panel-header>
     </mat-accordion>
 
-    <form>
+    <form [formGroup]="userInformationForm" (ngSubmit)="saveUserInformation()">
       <mat-form-field class="w-100 fs-15" appearance="outline">
         <mat-label>First Name</mat-label>
-        <input matInput type="text" [value]="user_information.first_name" placeholder="Achyut *">
+        <input matInput type="text" formControlName="first_name" placeholder="Achyut *">
       </mat-form-field>
 
       <mat-form-field class="w-100 fs-15" appearance="outline">
         <mat-label>Middle Name</mat-label>
-        <input matInput type="text" [value]="user_information.middle_name" placeholder="Dilip">
+        <input matInput type="text" formControlName="middle_name" placeholder="Dilip">
       </mat-form-field>
 
       <mat-form-field class="w-100 fs-15" appearance="outline">
         <mat-label>Last Name</mat-label>
-        <input matInput type="text" [value]="user_information.last_name" placeholder="Kadam *">
+        <input matInput type="text" formControlName="last_name" placeholder="Kadam *">
       </mat-form-field>
 
       <mat-form-field class="w-100 fs-15" appearance="outline">
         <mat-label>Contact</mat-label>
-        <input matInput type="text" [value]="user_information.contact" placeholder="9876543210 *">
+        <input matInput type="text" formControlName="contact" placeholder="9876543210 *">
       </mat-form-field>
 
       <mat-form-field class="w-100 fs-15" appearance="outline">
@@ -55,22 +55,22 @@
 
       <mat-form-field class="w-100 fs-15" appearance="outline">
         <mat-label>Aadhar Number</mat-label>
-        <input matInput type="text" [value]="user_information.adhaar_card_number" placeholder="1234 1123 0000 0000 *">
+        <input matInput type="text" formControlName="adhaar_card_number" placeholder="1234 1123 0000 0000 *">
       </mat-form-field>
 
       <mat-form-field class="w-100 fs-15" appearance="outline">
         <mat-label>Pan Number</mat-label>
-        <input matInput type="text" [value]="user_information.pan_card_number" placeholder="QWERT0000R *">
+        <input matInput type="text" formControlName="pan_card_number" placeholder="QWERT0000R *">
       </mat-form-field>
 
       <section class="fs-16 mb-32">
-        <mat-checkbox color="primary" [checked]="checked" class="d-block mb-16">Is Handicap</mat-checkbox>
+        <mat-checkbox color="primary" formControlName="is_handicap" [checked]="is_handicap" class="d-block mb-16">Is Handicap</mat-checkbox>
         <!-- <mat-checkbox class="op-7" [disabled]="true">Disabled</mat-checkbox> -->
       </section>
 
       <mat-form-field class="w-100 fs-15" appearance="outline">
         <mat-label>Handicap Details</mat-label>
-        <textarea matInput rows="6" placeholder="Write your message" [value]="user_information.handicap_details"></textarea>
+        <textarea matInput rows="6" placeholder="Write your message" formControlName="handicap_details"></textarea>
       </mat-form-field>
 
       <!-- <mat-form-field class="w-100 fs-15" appearance="outline">
@@ -78,7 +78,7 @@
         <input matInput type="text" value="Deep Javiya">
       </mat-form-field> -->
 
-      <button mat-button class="btn btn-info fw-normal" (click)="onSave($event)" type="submit">Submit</button>
+      <button mat-button class="btn btn-info fw-normal" type="submit">Submit</button>
     </form>
   </div>
 </div>

@@ -35,12 +35,11 @@ export class LoginComponent implements OnInit {
       console.warn("response", response)
 
       if(response.status == 200){
-        alert('Login Succesful');
-        sessionStorage.setItem('user_id', response.user_id)
-        sessionStorage.setItem('auth_token', response.auth_token)
-        sessionStorage.setItem('user_information_id', response.user_information_id)
+        sessionStorage.setItem('userId', response.user_id)
+        sessionStorage.setItem('authToken', response.auth_token)
+        sessionStorage.setItem('userInformationId', response.user_information_id)
         this.loginForm.reset()
-        this.router.navigate(["home"])
+        this.router.navigateByUrl('/home')
       }else{
         alert(response.errors)
       }

@@ -18,14 +18,21 @@ interface sidebarMenu {
 export class FullComponent {
 
   search: boolean = false;
+  show_header = false;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches),
       shareReplay()
-    );
+  );
 
   constructor(private router: Router, private breakpointObserver: BreakpointObserver) { }
+
+  ngOnit(){
+    if(sessionStorage.getItem('authToken')){
+      this.show_header = true
+    }
+  }
 
   routerActive: string = "activelink";
 
