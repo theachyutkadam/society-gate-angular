@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatExpansionPanel } from '@angular/material/expansion';
 import { Router } from '@angular/router';
-import { HttpServices } from 'src/app/connections/services/http-services';
+import { HttpServices } from 'src/app/components/connections/services/http-services';
 import { FormBuilder, FormControl,FormGroup,Validators} from '@angular/forms';
 import { first } from 'rxjs';
 import { Session } from 'inspector';

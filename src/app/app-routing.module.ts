@@ -22,7 +22,7 @@ import { UserIndexComponent } from './components/pages/users/index/user-index.co
 import { UserFormComponent } from './components/pages/users/user-form/user-form.component';
 import { LoginComponent } from './components/pages/login/login.component';
 import { LogoutComponent } from './components/pages/logout/logout.component';
-import { AuthGuard } from './connections/auth.guard';
+import { AuthGuard } from './components/connections/auth.guard';
 
 const routes: Routes = [
   {

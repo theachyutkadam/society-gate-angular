@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { HttpServices } from 'src/app/connections/services/http-services';
+import { HttpServices } from 'src/app/components/connections/services/http-services';
 
 @Component({
   selector: 'app-user-index',
@@ -29,9 +29,9 @@ export class UserIndexComponent implements OnInit {
   }
 
   getUsers(per_page: number = 10, current_page: number = 0) {
-    if(current_page == 0){
-      current_page = 1
-    }
+    // if(current_page == 0){
+    //   current_page = 1
+    // }
     let params = [
       { key: "page", value: current_page},
       { key: "per_page", value: per_page }
