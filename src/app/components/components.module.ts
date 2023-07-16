@@ -4,7 +4,7 @@ import { FeatherModule } from 'angular-feather';
 import { allIcons } from 'angular-feather/icons';
 import { DemoFlexyModule } from '../demo-flexy-module';
 
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AlertsComponent } from './default/alerts/alerts.component';
 import { ButtonsComponent } from './default/buttons/buttons.component';
 import { ChipsComponent } from './default/chips/chips.component';
@@ -25,6 +25,8 @@ import { TooltipsComponent } from './default/tooltips/tooltips.component';
 import { UserIndexComponent } from './pages/users/index/user-index.component';
 import { DashboardModule } from "../dashboard/dashboard.module";
 import { UserFormComponent } from './pages/users/user-form/user-form.component';
+import { LoginComponent } from './pages/login/login.component';
+import { LogoutComponent } from './pages/logout/logout.component';
 
 @NgModule({
     declarations: [
@@ -45,6 +47,8 @@ import { UserFormComponent } from './pages/users/user-form/user-form.component';
         TooltipsComponent,
         UserIndexComponent,
         UserFormComponent,
+        LoginComponent,
+        LogoutComponent,
     ],
     exports: [
         AlertsComponent,
@@ -68,7 +72,8 @@ import { UserFormComponent } from './pages/users/user-form/user-form.component';
         DemoFlexyModule,
         FormsModule,
         DashboardModule,
-        
+        ReactiveFormsModule,
+
     ]
 })
 export class ComponentsModule { }

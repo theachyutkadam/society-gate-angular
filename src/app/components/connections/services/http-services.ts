@@ -22,12 +22,33 @@ export class HttpServices {
     'Authorization': `${authToken}`,
   })
 
-  get(url: any): Observable<any>{
-    return this._http.get(`${api_base_url}${url}`, {headers: this.httpHeaderWithToken})
+  get(url: any, params: any = null): Observable<any>{
+    const converted_params = this.configureParams(params)
+    return this._http.get(`${api_base_url}${url}${converted_params}`, {headers: this.httpHeaderWithToken})
   }
 
-  postApi(url: any, obj: any){
+  put(url: any, obj: any){
+    return this._http.put(`${api_base_url}${url}`, obj, {headers: this.httpHeaderWithToken})
+  }
+
+  post(url: any, obj: any){
     return this._http.post(`${api_base_url}${url}`, obj, {headers: this.httpHeaderWithToken})
+  }
+
+  configureParams(params:any){
+    let paramsString = ""
+    if(params){
+      params.forEach((element: any, index: number) => {
+        if(index == 0){
+          paramsString += `?${element.key}=${element.value}`
+        }
+
+        if(index > 0 && params.length > 1){
+          paramsString += `&${element.key}=${element.value}`
+        }
+      });
+    }
+    return paramsString
   }
 
 }

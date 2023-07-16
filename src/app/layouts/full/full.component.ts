@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 interface sidebarMenu {
   link: string;
@@ -15,18 +16,37 @@ interface sidebarMenu {
   styleUrls: ['./full.component.scss']
 })
 export class FullComponent {
+  userDetails = sessionStorage.getItem("userDetails")
+  userInformationId = sessionStorage.getItem("userInformationId")
 
   search: boolean = false;
+  show_header = false;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches),
       shareReplay()
-    );
+  );
 
-  constructor(private breakpointObserver: BreakpointObserver) { }
+  constructor(private router: Router, private breakpointObserver: BreakpointObserver) { }
+
+  ngOnit(){
+    if(sessionStorage.getItem('authToken')){
+      this.show_header = true
+    }
+  }
 
   routerActive: string = "activelink";
+
+  setUser(user:any){
+    sessionStorage.setItem('selected_user_id', user)
+    this.router.navigateByUrl('/user-form')
+  }
+
+  logoutUser(){
+    console.log('Check logout link clicked--->');
+    this.router.navigateByUrl('/logout')
+  }
 
   sidebarMenu: sidebarMenu[] = [
     {
