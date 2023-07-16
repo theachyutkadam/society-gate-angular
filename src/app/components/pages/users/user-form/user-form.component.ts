@@ -15,9 +15,12 @@ import { Session } from 'inspector';
 export class UserFormComponent implements OnInit {
   checked = true;
   userInformationForm!: FormGroup
-  is_handicap: boolean = false
   id = sessionStorage.getItem('userInformationId')
   user_information_id = sessionStorage.getItem("selected_user_id")
+  userInformation: any;
+  gender: any;
+  maritial_status: any;
+  showHandicapBox: boolean = false
 
   constructor(
     private router: Router,
@@ -36,37 +39,41 @@ export class UserFormComponent implements OnInit {
       middle_name: ['', Validators.required],
       last_name: ['', Validators.required],
       contact: ['', Validators.required],
+      birth_date: ['', Validators.required],
+      gender: ['', Validators.required],
+      maritial_status: ['', Validators.required],
       adhaar_card_number: ['', Validators.required],
       pan_card_number: ['', Validators.required],
       handicap_details: [''],
-      is_handicap: ['']
+      is_handicap: [''],
     })
+    if (this.showHandicapBox){
+      this.userInformationForm.controls['handicap_details'].setErrors([Validators.required])
+    }
   }
 
   getUserInformations() {
-    const url = `user_informations/${this.user_information_id}`
+    let url = `user_informations/${this.user_information_id}`
     this._http.get(url)
       .subscribe((response: any) => {
 
+        this.userInformation = response
         this.userInformationForm.patchValue({
           first_name: response['first_name'],
           middle_name: response['middle_name'],
           last_name: response['last_name'],
           contact: response['contact'],
+          birth_date: new Date(response['birth_date']),
           adhaar_card_number: response['adhaar_card_number'],
           pan_card_number: response['pan_card_number'],
           handicap_details: response['handicap_details'],
           is_handicap: response['is_handicap']
         })
-        this.is_handicap = response['is_handicap']
       },
       err => {
         console.log(err);
       }
     )
-  }
-
-  onSave(event:any): void {
   }
 
   onBack(){
@@ -75,38 +82,48 @@ export class UserFormComponent implements OnInit {
   }
 
   saveUserInformation(){
-    console.log('Check--->start');
-    const url = `user_informations/${this.user_information_id}`
-
+    let url = `user_informations/${this.user_information_id}`
+    console.log('Check--form params->', this.userInformationForm.value);
+    console.log('Check-maritial_status-radio->', this.maritial_status);
+    console.log('Check-gender-radio->', this.gender);
     const userInformation = {
       "first_name": this.userInformationForm.value.first_name,
       "middle_name": this.userInformationForm.value.middle_name,
       "last_name": this.userInformationForm.value.last_name,
       "contact": this.userInformationForm.value.contact,
-      "gender": "male",
-      "birth_date": "June 12, 2011",
+      "gender": this.gender,
+      "birth_date": this.userInformationForm.value.birth_date,
       "adhaar_card_number": this.userInformationForm.value.adhaar_card_number,
       "pan_card_number": this.userInformationForm.value.pan_card_number,
       "handicap_details": this.userInformationForm.value.handicap_details,
       "is_handicap": this.userInformationForm.value.is_handicap,
-      "maritial_status": "devorsed",
+      "maritial_status": this.maritial_status,
       "user_id": this.user_information_id
     }
 
     this._http.put(url, userInformation).subscribe((response: any) => {
       console.warn("response", response)
-
       if(response.status == 200){
         this.updateSessionUserDetails(response['full_name'], this.user_information_id)
-
-        console.log('200--->', response);
-        // this.router.navigateByUrl('/users')
+        this.router.navigateByUrl('/')
       }else{
         console.log(response.errors)
       }
     },err=>{
       console.log(err)
     })
+  }
+
+  seRadioBtnValue(field:any, object:any){
+    if (field == "maritial_status"){
+      this.maritial_status = object.value
+    }else{
+      this.gender = object.value
+    }
+  }
+
+  toggleHandicapText(){
+    this.showHandicapBox? this.showHandicapBox = false : this.showHandicapBox = true
   }
 
   updateSessionUserDetails(name: any, selected_user_id: any){
