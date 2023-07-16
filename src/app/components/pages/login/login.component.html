@@ -1,18 +1,35 @@
-<p>login works!</p>
-<div>
-  <h1>Hi Welcome Back</h1>
-   <h3>Login Here</h3>
+<div class="card">
+  <div class="card-body">
+    <!-- <h4 class="mb-32">User Information</h4> -->
+    <!-- <mat-accordion>
+      <mat-expansion-panel-header>
+        <mat-panel-title> <h4 class="mb-32">Login</h4> </mat-panel-title>
+      </mat-expansion-panel-header>
+    </mat-accordion> -->
+
     <form  [formGroup]="loginForm" (ngSubmit)="login()">
-      <div>
-        <label for="email">Email</label>
-        <input formControlName="email" required type="email">
-        <label for="password">Password</label>
-        <input formControlName="password" type="password">
-      </div>
-      <button type="submit" class="btn btn-default">Login</button>
-      <span>
-        Don't have an account?
-        <!-- <a routerLink="/signUp">SignUp</a> -->
-      </span>
+      <mat-form-field class="w-100 fs-15" appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" formControlName="email" required placeholder="Email">
+      </mat-form-field>
+
+      <mat-form-field class="w-100 fs-15" appearance="outline">
+        <mat-label>Password</mat-label>
+        <input matInput formControlName="password" type="password" placeholder="Password">
+      </mat-form-field>
+
+      <button mat-button class="btn btn-success" type="submit" >Login</button>
     </form>
+  </div>
 </div>
+<h3>User forllowing Email ID for login and Password - 123456</h3>
+<h5>viola_kassulke@hilll-jaskolski.example</h5>
+<h5>jere.connelly@mills.test</h5>
+<h5>viva@monahan-dietrich.example</h5>
+<h5>margot@powlowski-pfeffer.test</h5>
+<h5>lilliana@brakus-simonis.test</h5>
+<h5>nadine@stehr-trantow.example</h5>
+<h5>scot.stoltenberg@carroll.example</h5>
+<h5>cesar.predovic@hettinger.example</h5>
+<h5>clemente@jacobs-cummerata.example</h5>
+<h5>pia@mckenzie.test</h5>
