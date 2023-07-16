@@ -58,6 +58,7 @@ export class UserFormComponent implements OnInit {
       .subscribe((response: any) => {
 
         this.userInformation = response
+        response['is_handicap']? this.showHandicapBox = true : this.showHandicapBox = false
         this.userInformationForm.patchValue({
           first_name: response['first_name'],
           middle_name: response['middle_name'],
