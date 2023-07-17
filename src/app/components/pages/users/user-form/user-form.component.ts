@@ -84,9 +84,6 @@ export class UserFormComponent implements OnInit {
 
   saveUserInformation(){
     let url = `user_informations/${this.user_information_id}`
-    console.log('Check--form params->', this.userInformationForm.value);
-    console.log('Check-maritial_status-radio->', this.maritial_status);
-    console.log('Check-gender-radio->', this.gender);
     const userInformation = {
       "first_name": this.userInformationForm.value.first_name,
       "middle_name": this.userInformationForm.value.middle_name,
