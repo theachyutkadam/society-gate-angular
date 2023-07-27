@@ -6,7 +6,7 @@
       <mat-expansion-panel-header>
         <mat-panel-title> <h4 class="mb-32">User Information</h4> </mat-panel-title>
         <mat-action-row>
-          <button mat-button color="primary" (click)="onBack()">Next</button>
+          <button mat-button color="primary" (click)="onBack()">Back</button>
         </mat-action-row>
       </mat-expansion-panel-header>
     </mat-accordion>
@@ -71,6 +71,13 @@
         <mat-label>Handicap Details</mat-label>
         <textarea matInput rows="6" placeholder="Write your message" formControlName="handicap_details"></textarea>
       </mat-form-field>
+
+      <picture>
+        <input type="file" class="file-upload" (change)="setAvatar($event)">
+        <source media='(min-width:0px)' [attr.width]="'200px'" [attr.height]="'200px'"
+        [srcset]="userInformation.avatar_url">
+        <img mat-card-image src="" alt="No avatar">
+      </picture>
 
       <!-- <mat-form-field class="w-100 fs-15" appearance="outline">
         <mat-label>Error</mat-label>

@@ -11,7 +11,7 @@ import { HttpServices } from 'src/app/components/connections/services/http-servi
 })
 
 export class UserIndexComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'user_details', 'status', 'user_type'];
+  displayedColumns: string[] = ['id', 'user_details', 'status', 'user_type', 'actions'];
   // users: any;
   dataSource: any;
 

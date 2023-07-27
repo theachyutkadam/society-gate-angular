@@ -13,7 +13,7 @@ import { HttpServices } from 'src/app/components/connections/services/http-servi
 
 export class BuildingIndexComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'name', 'status'];
+  displayedColumns: string[] = ['id', 'name', 'status', 'location', 'actions'];
   dataSource: any;
 
   public perPage = 10;
