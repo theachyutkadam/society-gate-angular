@@ -2,19 +2,20 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../connections/auth.guard';
 import { UserIndexComponent } from './users/index/user-index.component';
+import { FlatIndexComponent } from './flats/flat-index/flat-index.component';
 import { UserFormComponent } from './users/user-form/user-form.component';
 import { DashboardComponent } from 'src/app/dashboard/dashboard.component';
 
 const routes: Routes = [
   {
     path: '',
-    // component:
+    // component:,
     {path:"home", component:DashboardComponent, canActivate:[AuthGuard]},
     {path:"users", component:UserIndexComponent, canActivate:[AuthGuard]},
     {path:"user-form", component:UserFormComponent, canActivate:[AuthGuard]},
-
+    {path:"flats", component:FlatIndexComponent, canActivate:[AuthGuard]}
   }
-];
+]
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

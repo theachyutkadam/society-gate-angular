@@ -22,11 +22,13 @@ import { ToolbarComponent } from './default/toolbar/toolbar.component';
 import { TooltipsComponent } from './default/tooltips/tooltips.component';
 
 // pages
-import { UserIndexComponent } from './pages/users/index/user-index.component';
 import { DashboardModule } from "../dashboard/dashboard.module";
-import { UserFormComponent } from './pages/users/user-form/user-form.component';
 import { LoginComponent } from './pages/login/login.component';
 import { LogoutComponent } from './pages/logout/logout.component';
+
+import { UserIndexComponent } from './pages/users/index/user-index.component';
+import { UserFormComponent } from './pages/users/user-form/user-form.component';
+import { FlatIndexComponent } from './pages/flats/flat-index/flat-index.component';
 
 @NgModule({
     declarations: [
@@ -45,10 +47,12 @@ import { LogoutComponent } from './pages/logout/logout.component';
         SlideToggleComponent,
         ButtonsComponent,
         TooltipsComponent,
-        UserIndexComponent,
-        UserFormComponent,
+        
         LoginComponent,
         LogoutComponent,
+        UserFormComponent,
+        UserIndexComponent,
+        FlatIndexComponent,
     ],
     exports: [
         AlertsComponent,

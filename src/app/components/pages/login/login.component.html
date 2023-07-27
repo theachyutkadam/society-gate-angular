@@ -22,14 +22,7 @@
     </form>
   </div>
 </div>
-<h3>User forllowing Email ID for login and Password - 123456</h3>
-<h5>viola_kassulke@hilll-jaskolski.example</h5>
-<h5>jere.connelly@mills.test</h5>
-<h5>viva@monahan-dietrich.example</h5>
-<h5>margot@powlowski-pfeffer.test</h5>
-<h5>lilliana@brakus-simonis.test</h5>
-<h5>nadine@stehr-trantow.example</h5>
-<h5>scot.stoltenberg@carroll.example</h5>
-<h5>cesar.predovic@hettinger.example</h5>
-<h5>clemente@jacobs-cummerata.example</h5>
-<h5>pia@mckenzie.test</h5>
+<h2>Use following credentials for login</h2>
+<ng-container *ngFor="let user of activeUsers; let i=index">
+  <h4>{{user}}</h4>
+</ng-container>

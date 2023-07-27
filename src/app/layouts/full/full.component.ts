@@ -60,6 +60,11 @@ export class FullComponent {
       menu: "Users",
     },
     {
+      link: "/flats",
+      icon: "home",
+      menu: "Flats",
+    },
+    {
       link: "/button",
       icon: "disc",
       menu: "Buttons",

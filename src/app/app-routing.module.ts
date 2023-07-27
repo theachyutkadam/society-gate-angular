@@ -18,11 +18,14 @@ import { SnackbarComponent } from './components/default/snackbar/snackbar.compon
 import { TabsComponent } from './components/default/tabs/tabs.component';
 import { ToolbarComponent } from './components/default/toolbar/toolbar.component';
 import { TooltipsComponent } from './components/default/tooltips/tooltips.component';
-import { UserIndexComponent } from './components/pages/users/index/user-index.component';
-import { UserFormComponent } from './components/pages/users/user-form/user-form.component';
 import { LoginComponent } from './components/pages/login/login.component';
 import { LogoutComponent } from './components/pages/logout/logout.component';
 import { AuthGuard } from './components/connections/auth.guard';
+
+import { UserIndexComponent } from './components/pages/users/index/user-index.component';
+import { UserFormComponent } from './components/pages/users/user-form/user-form.component';
+import { FlatIndexComponent } from './components/pages/flats/flat-index/flat-index.component'
+
 
 const routes: Routes = [
   {
@@ -48,10 +51,12 @@ const routes: Routes = [
       {path:"tooltip", component:TooltipsComponent},
       {path:"button", component:ButtonsComponent},
       // paegs
-      {path:"users", component:UserIndexComponent, canActivate:[AuthGuard]},
-      {path:"user-form", component:UserFormComponent, canActivate:[AuthGuard]},
       {path:"login", component:LoginComponent},
       {path:"logout", component:LogoutComponent},
+
+      {path:"users", component:UserIndexComponent, canActivate:[AuthGuard]},
+      {path:"user-form", component:UserFormComponent, canActivate:[AuthGuard]},
+      {path:"flats", component:FlatIndexComponent, canActivate:[AuthGuard]},
     ]
   },
 

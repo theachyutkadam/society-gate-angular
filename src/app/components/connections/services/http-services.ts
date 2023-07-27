@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of, Subject } from 'rxjs';
-import { api_base_url, authToken, userInformationId} from '../api-config';
+import { api_url, api_base_url, authToken, userInformationId} from '../api-config';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +21,10 @@ export class HttpServices {
     'UserInformationId': `${userInformationId}`,
     'Authorization': `${authToken}`,
   })
+
+  health(): Observable<any>{
+    return this._http.get(`${api_url}`, {headers: this.httpHeaderWithToken})
+  }
 
   get(url: any, params: any = null): Observable<any>{
     const converted_params = this.configureParams(params)

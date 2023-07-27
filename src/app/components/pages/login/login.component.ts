@@ -9,7 +9,7 @@ import { HttpServices } from 'src/app/components/connections/services/http-servi
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-
+  activeUsers: any
   loginForm!: FormGroup
 
   constructor(
@@ -22,6 +22,17 @@ export class LoginComponent implements OnInit {
     this.loginForm = this.formbuilder.group({
       email: [''],
       password: ['', Validators.required]
+    })
+
+    this.collectUsers()
+  }
+
+  collectUsers(){
+    this._http.health().subscribe((response: any) => {
+      console.log("response", response)
+      this.activeUsers = response['active_users']
+    },err=>{
+      alert(err)
     })
   }
 
