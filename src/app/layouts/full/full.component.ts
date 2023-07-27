@@ -56,13 +56,18 @@ export class FullComponent {
     },
     {
       link: "/users",
-      icon: "user",
+      icon: "grid",
       menu: "Users",
     },
     {
       link: "/flats",
       icon: "home",
       menu: "Flats",
+    },
+    {
+      link: "/buildings",
+      icon: "table",
+      menu: "Buildings",
     },
     {
       link: "/button",

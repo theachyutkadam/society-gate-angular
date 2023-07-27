@@ -1,0 +1,36 @@
+<div class="card">
+  <div class="card-body">
+    <mat-accordion>
+      <mat-expansion-panel-header>
+        <mat-panel-title> <h4 class="mb-32">Building</h4> </mat-panel-title>
+        <mat-action-row>
+          <button mat-button color="primary" (click)="onBack()">Back</button>
+        </mat-action-row>
+      </mat-expansion-panel-header>
+    </mat-accordion>
+
+    <form [formGroup]="buildingForm" (ngSubmit)="saveBuilding()">
+      <mat-form-field class="w-100 fs-15" appearance="outline">
+        <mat-label>Name</mat-label>
+        <input matInput type="text" formControlName="name" placeholder="R3 *">
+      </mat-form-field>
+
+      <mat-form-field class="w-100 fs-15" appearance="outline">
+        <mat-label>Location</mat-label>
+        <input matInput type="text" formControlName="location" placeholder="Punawale">
+      </mat-form-field>
+
+      <mat-form-field class="w-100 fs-15" appearance="outline">
+        <mat-label>Status</mat-label>
+        <input matInput type="text" formControlName="status" placeholder="active *">
+      </mat-form-field>
+
+      <mat-form-field class="w-100 fs-15" appearance="outline">
+        <mat-label>Society ID</mat-label>
+        <input matInput type="text" formControlName="society_id" placeholder="1 *" readonly>
+      </mat-form-field>
+
+      <button mat-button [ngClass]="['!buildingForm.valid' ? 'btn btn-info fw-normal' : 'btn btn-ligth fw-normal']" type="submit">Submit</button>
+    </form>
+  </div>
+</div>

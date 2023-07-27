@@ -19,6 +19,7 @@ export class UserFormComponent implements OnInit {
   user_information_id = sessionStorage.getItem("selected_user_id")
   userInformation: any;
   gender: any;
+  userAvatar: any;
   maritial_status: any;
   showHandicapBox: boolean = false
 
@@ -46,6 +47,7 @@ export class UserFormComponent implements OnInit {
       pan_card_number: ['', Validators.required],
       handicap_details: [''],
       is_handicap: [''],
+      avatar_url: [''],
     })
     if (this.showHandicapBox){
       this.userInformationForm.controls['handicap_details'].setErrors([Validators.required])
@@ -68,7 +70,8 @@ export class UserFormComponent implements OnInit {
           adhaar_card_number: response['adhaar_card_number'],
           pan_card_number: response['pan_card_number'],
           handicap_details: response['handicap_details'],
-          is_handicap: response['is_handicap']
+          is_handicap: response['is_handicap'],
+          avatar_url: response['avatar_url']
         })
       },
       err => {
@@ -84,9 +87,6 @@ export class UserFormComponent implements OnInit {
 
   saveUserInformation(){
     let url = `user_informations/${this.user_information_id}`
-    console.log('Check--form params->', this.userInformationForm.value);
-    console.log('Check-maritial_status-radio->', this.maritial_status);
-    console.log('Check-gender-radio->', this.gender);
     const userInformation = {
       "first_name": this.userInformationForm.value.first_name,
       "middle_name": this.userInformationForm.value.middle_name,
@@ -99,8 +99,11 @@ export class UserFormComponent implements OnInit {
       "handicap_details": this.userInformationForm.value.handicap_details,
       "is_handicap": this.userInformationForm.value.is_handicap,
       "maritial_status": this.maritial_status,
-      "user_id": this.user_information_id
+      "user_id": this.user_information_id,
+      "avatar_url": this.userInformationForm.value.avatar_url
     }
+
+    console.log('Check- update values-->', userInformation);
 
     this._http.put(url, userInformation).subscribe((response: any) => {
       console.warn("response", response)
@@ -121,6 +124,13 @@ export class UserFormComponent implements OnInit {
     }else{
       this.gender = object.value
     }
+  }
+
+  setAvatar(event: any) {
+    console.log('Check--->', event.target.files[0]);
+    this.userAvatar = event.target.files[0];
+    this.userInformationForm.controls["avatar_url"].setValue(this.userAvatar, this.userAvatar.name)
+    console.log('Check-name-->', this.userAvatar.name);
   }
 
   toggleHandicapText(){

@@ -25,6 +25,8 @@ import { TooltipsComponent } from './default/tooltips/tooltips.component';
 import { DashboardModule } from "../dashboard/dashboard.module";
 import { LoginComponent } from './pages/login/login.component';
 import { LogoutComponent } from './pages/logout/logout.component';
+import { BuildingFormComponent } from './pages/buildings/building-form/building-form.component';
+import { BuildingIndexComponent } from './pages/buildings/index/building-index.component';
 
 import { UserIndexComponent } from './pages/users/index/user-index.component';
 import { UserFormComponent } from './pages/users/user-form/user-form.component';
@@ -47,11 +49,13 @@ import { FlatIndexComponent } from './pages/flats/flat-index/flat-index.componen
         SlideToggleComponent,
         ButtonsComponent,
         TooltipsComponent,
-        
+
+        UserIndexComponent,
+        UserFormComponent,
         LoginComponent,
         LogoutComponent,
-        UserFormComponent,
-        UserIndexComponent,
+        BuildingFormComponent,
+        BuildingIndexComponent,
         FlatIndexComponent,
     ],
     exports: [

@@ -4,15 +4,16 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { HttpServices } from 'src/app/components/connections/services/http-services';
 
+
 @Component({
-  selector: 'app-user-index',
-  templateUrl: './user-index.component.html',
-  styleUrls: ['./user-index.component.scss']
+  selector: 'app-building-index',
+  templateUrl: './building-index.component.html',
+  styleUrls: ['./building-index.component.scss']
 })
 
-export class UserIndexComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'user_details', 'status', 'user_type', 'actions'];
-  // users: any;
+export class BuildingIndexComponent implements OnInit {
+
+  displayedColumns: string[] = ['id', 'name', 'status', 'location', 'actions'];
   dataSource: any;
 
   public perPage = 10;
@@ -25,23 +26,20 @@ export class UserIndexComponent implements OnInit {
   constructor(private router: Router, private _http: HttpServices) { }
 
   ngOnInit(): void {
-    this.getUsers()
+    this.getBuildings()
   }
 
-  getUsers(per_page: number = 10, current_page: number = 0) {
-    // if(current_page == 0){
-    //   current_page = 1
-    // }
+  getBuildings(per_page: number = 10, current_page: number = 0) {
     let params = [
       { key: "page", value: current_page},
       { key: "per_page", value: per_page }
     ]
-    this._http.get('users', params)
+    this._http.get('buildings', params)
     .subscribe(
       (response: any) => {
         console.warn("response", response)
 
-        this.dataSource = new MatTableDataSource<any>(response['users']);
+        this.dataSource = new MatTableDataSource<any>(response['buildings']);
         this.totalCount = response['total_count']
         this.totalPages = response['total_pages']
       },
@@ -67,14 +65,15 @@ export class UserIndexComponent implements OnInit {
     return "btn-primary"
   }
 
-  setUser(user:any){
-    sessionStorage.setItem('selected_user_id', user)
-    this.router.navigateByUrl('/user-form')
+  setBuilding(building:any){
+    sessionStorage.setItem('selected_building_id', building)
+    this.router.navigateByUrl('/building-form')
   }
 
   // Handle pagination
   changePage(event: PageEvent) {
     console.log('Check--->', event);
-    this.getUsers(event.pageSize, event.pageIndex)
+    this.getBuildings(event.pageSize, event.pageIndex)
   }
+
 }
