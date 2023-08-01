@@ -37,8 +37,8 @@ export class FlatIndexComponent implements OnInit {
       (response: any) => {
         console.warn("response", response)
         this.dataSource = new MatTableDataSource<any>(response['flats']);
-        this.totalCount = response['total_count']
-        this.totalPages = response['total_pages']
+        this.totalCount = response['meta']['total_count']
+        this.totalPages = response['meta']['total_pages']
       },
       err => {
         console.log(err);
