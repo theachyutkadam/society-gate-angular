@@ -27,7 +27,7 @@ export class FlatIndexComponent implements OnInit {
     this.getFlats()
   }
 
-  getFlats(per_page: number = 10, current_page: number = 0) {
+  getFlats(per_page: number = this.perPage, current_page: number = this.currentPage) {
     let params = [
       { key: "page", value: current_page},
       { key: "per_page", value: per_page }
