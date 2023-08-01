@@ -11,8 +11,8 @@ import { HttpServices } from 'src/app/components/connections/services/http-servi
 })
 
 export class UserIndexComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'user_details', 'full_name', 'status', 'user_type', 'actions'];
-  // users: any;
+  // displayedColumns: string[] = ['id', 'user_details', 'full_name', 'status', 'user_type', 'actions'];
+  displayedColumns: string[] = ['id', 'full_name', 'user_details', 'status', 'maritial_status', 'user_type', 'actions'];
   dataSource: any;
 
   public perPage = 10;
@@ -25,20 +25,40 @@ export class UserIndexComponent implements OnInit {
   constructor(private router: Router, private _http: HttpServices) { }
 
   ngOnInit(): void {
-    this.getUsers()
+    // this.getUsers()
+    this.getUserInformations()
   }
 
-  getUsers(per_page: number = 10, current_page: number = 0) {
+  // getUsers(per_page: number = 10, current_page: number = 0) {
+  //   let params = [
+  //     { key: "page", value: current_page},
+  //     { key: "per_page", value: per_page }
+  //   ]
+  //   this._http.get('users', params)
+  //   .subscribe(
+  //     (response: any) => {
+  //       console.warn("response", response)
+
+  //       this.dataSource = new MatTableDataSource<any>(response['users']);
+  //       this.totalCount = response['meta']['total_count']
+  //       this.totalPages = response['meta']['total_pages']
+  //     },
+  //     err => {
+  //       console.log(err);
+  //     }
+  //   )
+  // }
+  getUserInformations(per_page: number = 10, current_page: number = 0) {
     let params = [
       { key: "page", value: current_page},
       { key: "per_page", value: per_page }
     ]
-    this._http.get('users', params)
+    this._http.get('user_informations', params)
     .subscribe(
       (response: any) => {
         console.warn("response", response)
 
-        this.dataSource = new MatTableDataSource<any>(response['users']);
+        this.dataSource = new MatTableDataSource<any>(response['user_informations']);
         this.totalCount = response['meta']['total_count']
         this.totalPages = response['meta']['total_pages']
       },
@@ -72,6 +92,7 @@ export class UserIndexComponent implements OnInit {
   // Handle pagination
   changePage(event: PageEvent) {
     console.log('Check--->', event);
-    this.getUsers(event.pageSize, event.pageIndex)
+    // this.getUsers(event.pageSize, event.pageIndex)
+    this.getUserInformations(event.pageSize, event.pageIndex)
   }
 }

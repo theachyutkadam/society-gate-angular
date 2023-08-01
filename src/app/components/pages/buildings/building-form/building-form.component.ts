@@ -86,8 +86,7 @@ export class BuildingFormComponent implements OnInit {
     }
 
     this._http.put(url, building).subscribe((response: any) => {
-      console.warn("response", response)
-      if(response.status == 200){
+      if(response['meta']['status'] == 200){
         this.router.navigateByUrl('/buildings')
       }else{
         console.log(response.errors)

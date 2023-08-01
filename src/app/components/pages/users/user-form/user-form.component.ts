@@ -109,9 +109,9 @@ export class UserFormComponent implements OnInit {
 
     this._http.put(url, userInformation).subscribe((response: any) => {
       console.warn("response", response)
-      if(response.status == 200){
+      if(response['meta']['status'] == 200){
         this.updateSessionUserDetails(response['full_name'], this.user_information_id)
-        this.router.navigateByUrl('/')
+        this.router.navigateByUrl('/users')
       }else{
         console.log(response.errors)
       }
