@@ -77,14 +77,18 @@
         <source media='(min-width:0px)' [attr.width]="'200px'" [attr.height]="'200px'"
         [srcset]="userInformation.avatar_url">
         <img mat-card-image src="" alt="No avatar">
-      </picture>
+      </picture><br><br>
 
-      <!-- <mat-form-field class="w-100 fs-15" appearance="outline">
+      <mat-form-field class="w-100 fs-15" appearance="outline">
         <mat-label>Error</mat-label>
         <input matInput type="text" value="Deep Javiya">
-      </mat-form-field> -->
+      </mat-form-field>
 
-      <button mat-button [ngClass]="['!userInformationForm.valid' ? 'btn btn-light fw-normal' : 'btn btn-info fw-normal']" type="submit">Submit</button>
+
+      <button mat-button class="btn btn-info fw-normal" type="submit">
+        Submit
+      </button>
+
       <!-- <button mat-button [ngClass]="['!userInformationForm.valid' ? 'btn btn-light fw-normal' : 'btn btn-info fw-normal']" type="submit" [disabled]="!userInformationForm.valid">Submit</button> -->
     </form>
   </div>

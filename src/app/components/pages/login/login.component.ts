@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
       console.log("response", response)
       this.activeUsers = response['active_users']
     },err=>{
-      alert(err)
+      console.log(err)
     })
   }
 
@@ -53,10 +53,10 @@ export class LoginComponent implements OnInit {
         this.loginForm.reset()
         this.router.navigateByUrl('/home')
       }else{
-        alert(response.errors)
+        console.log(response.errors)
       }
     },err=>{
-      alert(err)
+      console.log(err)
     })
   }
 }

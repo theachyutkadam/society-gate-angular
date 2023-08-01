@@ -55,9 +55,9 @@ export class FullComponent {
       menu: "Dashboard",
     },
     {
-      link: "/users",
-      icon: "grid",
-      menu: "Users",
+      link: "/buildings",
+      icon: "table",
+      menu: "Buildings",
     },
     {
       link: "/flats",
@@ -65,9 +65,9 @@ export class FullComponent {
       menu: "Flats",
     },
     {
-      link: "/buildings",
-      icon: "table",
-      menu: "Buildings",
+      link: "/users",
+      icon: "grid",
+      menu: "Users",
     },
     {
       link: "/button",

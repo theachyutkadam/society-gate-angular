@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { Action } from 'rxjs/internal/scheduler/Action';
 import { HttpServices } from 'src/app/components/connections/services/http-services';
 
 @Component({
@@ -11,7 +12,7 @@ import { HttpServices } from 'src/app/components/connections/services/http-servi
 })
 
 export class FlatIndexComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'number', 'structure', 'is_rented', 'owner', 'tenant'];
+  displayedColumns: string[] = ['id', 'number', 'structure', 'is_rented', 'owner', 'tenant', 'actions'];
   // flats: any;
   dataSource: any;
   public perPage = 10;
@@ -36,6 +37,7 @@ export class FlatIndexComponent implements OnInit {
     .subscribe(
       (response: any) => {
         console.warn("response", response)
+        // this.dataSource = new MatTableDataSource<any>(response);
         this.dataSource = new MatTableDataSource<any>(response['flats']);
         this.totalCount = response['total_count']
         this.totalPages = response['total_pages']
