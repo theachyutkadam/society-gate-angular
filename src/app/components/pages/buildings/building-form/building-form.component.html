@@ -21,8 +21,13 @@
       </mat-form-field>
 
       <mat-form-field class="w-100 fs-15" appearance="outline">
-        <mat-label>Status</mat-label>
-        <input matInput type="text" formControlName="status" placeholder="active *">
+        <mat-label>Select an Status</mat-label>
+        <mat-select [(value)]="status" formControlName="status">
+          <mat-option>Select Status</mat-option>
+          <mat-option value="active">Active</mat-option>
+          <mat-option value="blocked">Blocked</mat-option>
+          <mat-option value="closed">Closed</mat-option>
+        </mat-select>
       </mat-form-field>
 
       <mat-form-field class="w-100 fs-15" appearance="outline">

@@ -8,7 +8,7 @@ import { HttpServices } from 'src/app/components/connections/services/http-servi
   selector: 'app-building-form',
   templateUrl: './building-form.component.html',
   styleUrls: ['./building-form.component.scss'],
-  viewProviders: [MatExpansionPanel]
+  viewProviders: [MatExpansionPanel],
 })
 export class BuildingFormComponent implements OnInit {
 
@@ -16,6 +16,7 @@ export class BuildingFormComponent implements OnInit {
   id = sessionStorage.getItem('buildingId')
   building_id = sessionStorage.getItem("selected_building_id")
   building: any;
+  status: any
 
   constructor(
     private router: Router,
@@ -41,12 +42,12 @@ export class BuildingFormComponent implements OnInit {
     let url = `buildings/${this.building_id}`
     this._http.get(url)
       .subscribe((response: any) => {
-        this.building = response
+        this.building = response['building']
+        this.status = this.building['status']
         this.buildingForm.patchValue({
-          name: response['name'],
-          location: response['location'],
-          status: response['status'],
-          society_id: response['society_id'],
+          name: this.building['name'],
+          location: this.building['location'],
+          society_id: this.building['society_id'],
         })
       },
       err => {

@@ -18,10 +18,10 @@ export class UserFormComponent implements OnInit {
   id = sessionStorage.getItem('userInformationId')
   user_information_id = sessionStorage.getItem("selected_user_id")
   userInformation: any;
-  gender: any;
   userAvatar: any;
-  maritial_status: any;
   showHandicapBox: boolean = false
+  gender: any
+  maritial_status: any
 
   constructor(
     private router: Router,
@@ -59,19 +59,21 @@ export class UserFormComponent implements OnInit {
     this._http.get(url)
       .subscribe((response: any) => {
 
-        this.userInformation = response
-        response['is_handicap']? this.showHandicapBox = true : this.showHandicapBox = false
+        this.userInformation = response['user_information']
+        this.userInformation['is_handicap']? this.showHandicapBox = true : this.showHandicapBox = false
+        this.gender = this.userInformation['gender']
+        this.maritial_status = this.userInformation['maritial_status']
         this.userInformationForm.patchValue({
-          first_name: response['first_name'],
-          middle_name: response['middle_name'],
-          last_name: response['last_name'],
-          contact: response['contact'],
-          birth_date: new Date(response['birth_date']),
-          adhaar_card_number: response['adhaar_card_number'],
-          pan_card_number: response['pan_card_number'],
-          handicap_details: response['handicap_details'],
-          is_handicap: response['is_handicap'],
-          avatar_url: response['avatar_url']
+          first_name: this.userInformation['first_name'],
+          middle_name: this.userInformation['middle_name'],
+          last_name: this.userInformation['last_name'],
+          contact: this.userInformation['contact'],
+          birth_date: new Date(this.userInformation['birth_date']),
+          adhaar_card_number: this.userInformation['adhaar_card_number'],
+          pan_card_number: this.userInformation['pan_card_number'],
+          handicap_details: this.userInformation['handicap_details'],
+          is_handicap: this.userInformation['is_handicap'],
+          avatar_url: this.userInformation['avatar_url']
         })
       },
       err => {
@@ -118,13 +120,13 @@ export class UserFormComponent implements OnInit {
     })
   }
 
-  seRadioBtnValue(field:any, object:any){
-    if (field == "maritial_status"){
-      this.maritial_status = object.value
-    }else{
-      this.gender = object.value
-    }
-  }
+  // seRadioBtnValue(field:any, object:any){
+  //   if (field == "maritial_status"){
+  //     this.maritial_status = object.value
+  //   }else{
+  //     this.gender = object.value
+  //   }
+  // }
 
   setAvatar(event: any) {
     console.log('Check--->', event.target.files[0]);
