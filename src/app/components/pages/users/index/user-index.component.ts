@@ -11,7 +11,7 @@ import { HttpServices } from 'src/app/components/connections/services/http-servi
 })
 
 export class UserIndexComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'user_details', 'status', 'user_type', 'actions'];
+  displayedColumns: string[] = ['id', 'user_details', 'full_name', 'status', 'user_type', 'actions'];
   // users: any;
   dataSource: any;
 
@@ -29,9 +29,6 @@ export class UserIndexComponent implements OnInit {
   }
 
   getUsers(per_page: number = 10, current_page: number = 0) {
-    // if(current_page == 0){
-    //   current_page = 1
-    // }
     let params = [
       { key: "page", value: current_page},
       { key: "per_page", value: per_page }
@@ -42,8 +39,8 @@ export class UserIndexComponent implements OnInit {
         console.warn("response", response)
 
         this.dataSource = new MatTableDataSource<any>(response['users']);
-        this.totalCount = response['total_count']
-        this.totalPages = response['total_pages']
+        this.totalCount = response['meta']['total_count']
+        this.totalPages = response['meta']['total_pages']
       },
       err => {
         console.log(err);
