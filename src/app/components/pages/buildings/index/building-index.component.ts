@@ -29,7 +29,7 @@ export class BuildingIndexComponent implements OnInit {
     this.getBuildings()
   }
 
-  getBuildings(per_page: number = 10, current_page: number = 0) {
+  getBuildings(per_page: number = this.perPage, current_page: number = this.currentPage) {
     let params = [
       { key: "page", value: current_page},
       { key: "per_page", value: per_page }
@@ -40,8 +40,8 @@ export class BuildingIndexComponent implements OnInit {
         console.warn("response", response)
 
         this.dataSource = new MatTableDataSource<any>(response['buildings']);
-        this.totalCount = response['total_count']
-        this.totalPages = response['total_pages']
+        this.totalCount = response['meta']['total_count']
+        this.totalPages = response['meta']['total_pages']
       },
       err => {
         console.log(err);

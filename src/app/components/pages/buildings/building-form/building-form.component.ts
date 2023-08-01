@@ -16,7 +16,9 @@ export class BuildingFormComponent implements OnInit {
   id = sessionStorage.getItem('buildingId')
   building_id = sessionStorage.getItem("selected_building_id")
   building: any;
+  societies: any;
   status: any
+  formName: String = "new"
 
   constructor(
     private router: Router,
@@ -27,6 +29,7 @@ export class BuildingFormComponent implements OnInit {
   ngOnInit(): void {
     this.initializeBuildingForm()
     this.getBuildings()
+    this.formName == 'new' ? this.getSocieties() : ''
   }
 
   initializeBuildingForm(){
@@ -38,16 +41,28 @@ export class BuildingFormComponent implements OnInit {
     })
   }
 
+  getSocieties(){
+    this._http.get('societies')
+      .subscribe((response: any) => {
+        this.societies = response['societies']
+      },
+      err => {
+        console.log(err);
+      }
+    )
+  }
+
   getBuildings() {
     let url = `buildings/${this.building_id}`
     this._http.get(url)
       .subscribe((response: any) => {
         this.building = response['building']
         this.status = this.building['status']
+        this.formName = "edit"
         this.buildingForm.patchValue({
           name: this.building['name'],
           location: this.building['location'],
-          society_id: this.building['society_id'],
+          society_id: this.building['society']['id'],
         })
       },
       err => {

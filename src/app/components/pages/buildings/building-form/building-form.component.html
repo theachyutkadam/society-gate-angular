@@ -30,10 +30,24 @@
         </mat-select>
       </mat-form-field>
 
-      <mat-form-field class="w-100 fs-15" appearance="outline">
-        <mat-label>Society ID</mat-label>
-        <input matInput type="text" formControlName="society_id" placeholder="1 *" readonly>
-      </mat-form-field>
+      <div *ngIf="formName == 'new'; then new else edit"></div>
+
+      <ng-template #new>
+        <mat-form-field class="w-100 fs-15" appearance="outline">
+          <mat-label>Select an Society</mat-label>
+          <mat-select formControlName="society_id">
+            <mat-option>Select Society</mat-option>
+            <mat-option *ngFor="let society of societies;" [value]="society.id">{{society.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </ng-template>
+
+      <ng-template #edit>
+        <mat-form-field class="w-100 fs-15" appearance="outline">
+          <mat-label >Society</mat-label>
+            <input matInput placeholder="1 *" readonly [value]="building.society.name" disabled="true">
+        </mat-form-field>
+      </ng-template>
 
       <button mat-button [ngClass]="['!buildingForm.valid' ? 'btn btn-info fw-normal' : 'btn btn-ligth fw-normal']" type="submit">Submit</button>
     </form>
