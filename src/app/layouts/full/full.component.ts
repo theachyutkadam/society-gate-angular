@@ -31,6 +31,7 @@ export class FullComponent {
   constructor(private router: Router, private breakpointObserver: BreakpointObserver) { }
 
   ngOnit(){
+    console.log("testig ng")
     if(sessionStorage.getItem('authToken')){
       this.show_header = true
     }

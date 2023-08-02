@@ -28,7 +28,7 @@ import { BuildingFormComponent } from './components/pages/buildings/building-for
 import { UserIndexComponent } from './components/pages/users/index/user-index.component';
 import { UserFormComponent } from './components/pages/users/user-form/user-form.component';
 import { FlatIndexComponent } from './components/pages/flats/flat-index/flat-index.component'
-
+import { FlatFormComponent } from './components/pages/flats/flat-form/flat-form.component'
 
 const routes: Routes = [
   {
@@ -63,6 +63,7 @@ const routes: Routes = [
       {path:"buildings", component:BuildingIndexComponent, canActivate:[AuthGuard]},
       {path:"building-form", component:BuildingFormComponent, canActivate:[AuthGuard]},
       {path:"flats", component:FlatIndexComponent, canActivate:[AuthGuard]},
+      {path:"flat-form", component:FlatFormComponent, canActivate:[AuthGuard]},
     ]
   },
 

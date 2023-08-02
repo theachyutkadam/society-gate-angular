@@ -31,6 +31,7 @@ import { BuildingIndexComponent } from './pages/buildings/index/building-index.c
 import { UserIndexComponent } from './pages/users/index/user-index.component';
 import { UserFormComponent } from './pages/users/user-form/user-form.component';
 import { FlatIndexComponent } from './pages/flats/flat-index/flat-index.component';
+import { FlatFormComponent } from './pages/flats/flat-form/flat-form.component';
 
 @NgModule({
     declarations: [
@@ -57,6 +58,7 @@ import { FlatIndexComponent } from './pages/flats/flat-index/flat-index.componen
         BuildingFormComponent,
         BuildingIndexComponent,
         FlatIndexComponent,
+        FlatFormComponent,
     ],
     exports: [
         AlertsComponent,

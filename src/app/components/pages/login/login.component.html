@@ -10,7 +10,7 @@
     <form  [formGroup]="loginForm" (ngSubmit)="login()">
       <mat-form-field class="w-100 fs-15" appearance="outline">
         <mat-label>Email</mat-label>
-        <input matInput type="email" formControlName="email" required placeholder="Email">
+        <input matInput type="email" formControlName="email" required placeholder="admin@test.com">
       </mat-form-field>
 
       <mat-form-field class="w-100 fs-15" appearance="outline">
@@ -22,7 +22,7 @@
     </form>
   </div>
 </div>
-<h2>Use following credentials for login</h2>
+<h2 *ngIf="activeUsers">Use following credentials for login password- 123456</h2>
 <ng-container *ngFor="let user of activeUsers; let i=index">
   <h4>{{user}}</h4>
 </ng-container>

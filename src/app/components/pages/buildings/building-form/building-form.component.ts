@@ -82,7 +82,7 @@ export class BuildingFormComponent implements OnInit {
       "name": this.buildingForm.value.name,
       "location": this.buildingForm.value.location,
       "status": this.buildingForm.value.status,
-      "society_id": this.building ? this.building['society_id'] : this.buildingForm.value.society_id
+      "society_id": this.building ? this.building['society']['id'] : this.buildingForm.value.society_id
     }
 
     this._http.put(url, building).subscribe((response: any) => {

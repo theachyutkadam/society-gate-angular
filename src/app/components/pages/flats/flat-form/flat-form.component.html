@@ -1,1 +1,68 @@
-<p>flat-form works!</p>
+<div class="card">
+  <div class="card-body">
+    <!-- <h4 class="mb-32">User Information</h4> -->
+    <mat-accordion>
+      <mat-expansion-panel-header>
+        <mat-panel-title> <h4 class="mb-32">Flat</h4> </mat-panel-title>
+        <mat-action-row>
+          <button mat-button color="primary" (click)="onBack()">Back</button>
+        </mat-action-row>
+      </mat-expansion-panel-header>
+    </mat-accordion>
+
+    <form [formGroup]="flatForm" (ngSubmit)="saveFlat()">
+      <mat-form-field class="w-100 fs-15" appearance="outline">
+        <mat-label>Electricity Meter Number</mat-label>
+        <input matInput type="text" formControlName="electricity_meter_number" placeholder="123456789 *" readonly>
+      </mat-form-field>
+
+      <mat-form-field class="w-100 fs-15" appearance="outline">
+        <mat-label>Gas Meter Number</mat-label>
+        <input matInput type="text" formControlName="gas_meter_number" placeholder="123456789" readonly>
+      </mat-form-field>
+
+      <mat-form-field class="w-100 fs-15" appearance="outline">
+        <mat-label>Letter Box Number</mat-label>
+        <input matInput type="text" formControlName="letter_box_number" placeholder="123456789" readonly>
+      </mat-form-field>
+
+      <mat-form-field class="w-100 fs-15" appearance="outline">
+        <mat-label>Number</mat-label>
+        <input matInput type="text" formControlName="number" placeholder="123456789" readonly>
+      </mat-form-field>
+
+      <mat-form-field class="w-100 fs-15" appearance="outline">
+        <mat-label>Area In Feet</mat-label>
+        <input matInput type="number" formControlName="area_in_feet" placeholder="548 *" min="100">
+      </mat-form-field>
+
+      <section class="fs-16 mb-32">
+        <mat-checkbox color="primary" formControlName="is_rented" [checked]="is_rented" class="d-block mb-16">Is Rented</mat-checkbox>
+      </section>
+
+      <mat-form-field class="w-100 fs-15" appearance="outline">
+        <mat-label>Select an Tenant</mat-label>
+        <mat-select formControlName="society_id">
+          <mat-option>Select Tenant</mat-option>
+          <mat-option *ngFor="let tenant of tenantList;" [value]="tenant.id">{{tenant.id}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+
+      <mat-form-field class="w-100 fs-15" appearance="outline">
+        <mat-label>Flat Structure</mat-label>
+        <mat-select [(value)]="structure" formControlName="structure">
+          <mat-option>Select Flat Structure</mat-option>
+          <mat-option value="one">1 BHK</mat-option>
+          <mat-option value="two">2 BHK</mat-option>
+          <mat-option value="three">3 BHK</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <button mat-button class="btn btn-info fw-normal" type="submit">
+        Submit
+      </button>
+      <!-- <button mat-button [ngClass]="['!flatForm.valid' ? 'btn btn-light fw-normal' : 'btn btn-info fw-normal']" type="submit" [disabled]="!flatForm.valid">Submit</button> -->
+    </form>
+  </div>
+</div>
