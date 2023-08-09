@@ -11,7 +11,27 @@
           <a href="javascript:void(0)" class="d-flex align-items-center">
             <img src="assets/images/door3.jpeg" width="35px" height="30px" alt=""> <span class="ms-16 fw-medium fs-20">Safty Door</span>
           </a>
+        </div>
+        <div class="ms-auto">
+          <button mat-button class="fs-16 pt-4 pb-4 ps-8 pe-8 text-light-muted" [matMenuTriggerFor]="menu">
+            <img src="assets/images/user2.webp" class="rounded-circle" alt="">
+            <span class="fw-light ms-8 text-secondary">Hi,</span>
+            <span class="fw-bold ms-8">{{userDetails}}</span>
+            <i-feather name="chevron-down" class="feather-base mt-n2"></i-feather>
+          </button>
+          <mat-menu #menu="matMenu" class="profile-dropdown">
+            <div class="p-16 mb-4">
+              <button mat-menu-item class="fs-16" (click)="setUser(userInformationId)">Edit Profile</button>
+              <button mat-menu-item class="fs-16">Account</button>
+              <button mat-menu-item class="fs-16">Change Password</button>
+              <button mat-menu-item class="fs-16">My Settings</button>
+            </div>
+            <hr>
 
+            <div class="p-16">
+              <a href="/logout"><button mat-button class="btn btn-info w-100">Logout</button></a>
+            </div>
+          </mat-menu>
         </div>
 
         <div class="pt-8">
@@ -31,15 +51,15 @@
 
   <mat-sidenav-content>
     <!-- Header -->
-    <mat-toolbar class="header ps-24 pe-24 set-height">
+    <!-- <mat-toolbar class="header ps-24 pe-24 set-height"> -->
       <!-- <button type="button" class="ms-4" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
         *ngIf="isHandset$ | async">
         <i-feather name="menu" class="text-light-muted feather-base mt-n3"></i-feather>
       </button> -->
-      <button mat-icon-button class="ms-4 me-4" (click)="search=!search">
+      <!-- <button mat-icon-button class="ms-4 me-4" (click)="search=!search">
         <i-feather name="search" class="mt-n3 text-light-muted feather-base text-dark"></i-feather>
-      </button>
-      <div class="ms-auto">
+      </button> -->
+      <!-- <div class="ms-auto">
         <button mat-button class="fs-16 pt-4 pb-4 ps-8 pe-8 text-light-muted" [matMenuTriggerFor]="menu">
           <img src="assets/images/user2.webp" class="rounded-circle" alt="">
           <span class="fw-light ms-8 text-secondary">Hi,</span>
@@ -60,8 +80,8 @@
           </div>
 
         </mat-menu>
-      </div>
-    </mat-toolbar>
+      </div> -->
+    <!-- </mat-toolbar> -->
 
     <!-- Content -->
     <!-- <div class="body-wrapper"> -->
