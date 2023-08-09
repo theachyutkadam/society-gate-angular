@@ -10,6 +10,8 @@ import { UserIndexComponent } from './users/index/user-index.component';
 import { UserFormComponent } from './users/user-form/user-form.component';
 import { BuildingFormComponent } from './buildings/building-form/building-form.component';
 import { BuildingIndexComponent } from './buildings/index/building-index.component';
+import { VehicleIndexComponent } from './vehicles/index/vehicle-index.component';
+import { GateEntriesIndexComponent } from './gate-entries/index/gate-entries-index.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,9 @@ import { BuildingIndexComponent } from './buildings/index/building-index.compone
     // UserFormComponent,
     // BuildingIndexComponent,
     // BuildingFormComponent
+  
+    // VehicleIndexComponent,
+    // GateEntriesIndexComponent
   ],
   imports: [
     CommonModule,
