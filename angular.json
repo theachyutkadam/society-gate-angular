@@ -35,7 +35,8 @@
             ],
             "styles": [
               "src/styles.scss",
-              "src/assets/styles/style.scss"
+              "src/assets/styles/style.scss",
+              "node_modules/ngx-toastr/toastr.css",
             ],
             "scripts": [
               "node_modules/apexcharts/dist/apexcharts.min.js"

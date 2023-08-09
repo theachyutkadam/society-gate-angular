@@ -3,6 +3,7 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { HttpServices } from 'src/app/components/connections/services/http-services';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-user-index',
@@ -11,7 +12,6 @@ import { HttpServices } from 'src/app/components/connections/services/http-servi
 })
 
 export class UserIndexComponent implements OnInit {
-  // displayedColumns: string[] = ['id', 'user_details', 'full_name', 'status', 'user_type', 'actions'];
   displayedColumns: string[] = ['id', 'full_name', 'user_details', 'status', 'maritial_status', 'user_type', 'actions'];
   dataSource: any;
 
@@ -22,32 +22,16 @@ export class UserIndexComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
 
-  constructor(private router: Router, private _http: HttpServices) { }
+  constructor(
+    private router: Router,
+    private _http: HttpServices,
+    private toastr: ToastrService
+  ) { }
 
   ngOnInit(): void {
-    // this.getUsers()
     this.getUserInformations()
   }
 
-  // getUsers(per_page: number = 10, current_page: number = 0) {
-  //   let params = [
-  //     { key: "page", value: current_page},
-  //     { key: "per_page", value: per_page }
-  //   ]
-  //   this._http.get('users', params)
-  //   .subscribe(
-  //     (response: any) => {
-  //       console.warn("response", response)
-
-  //       this.dataSource = new MatTableDataSource<any>(response['users']);
-  //       this.totalCount = response['meta']['total_count']
-  //       this.totalPages = response['meta']['total_pages']
-  //     },
-  //     err => {
-  //       console.log(err);
-  //     }
-  //   )
-  // }
   getUserInformations(per_page: number = 10, current_page: number = 0) {
     let params = [
       { key: "page", value: current_page},
@@ -57,13 +41,13 @@ export class UserIndexComponent implements OnInit {
     .subscribe(
       (response: any) => {
         console.warn("response", response)
-
         this.dataSource = new MatTableDataSource<any>(response['user_informations']);
         this.totalCount = response['meta']['total_count']
         this.totalPages = response['meta']['total_pages']
       },
       err => {
         console.log(err);
+        this.toastr.error(err, 'Error');
       }
     )
   }
@@ -92,7 +76,6 @@ export class UserIndexComponent implements OnInit {
   // Handle pagination
   changePage(event: PageEvent) {
     console.log('Check--->', event);
-    // this.getUsers(event.pageSize, event.pageIndex)
     this.getUserInformations(event.pageSize, event.pageIndex)
   }
 }

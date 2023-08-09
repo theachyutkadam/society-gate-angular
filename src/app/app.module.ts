@@ -14,6 +14,7 @@ import { DemoFlexyModule } from './demo-flexy-module'
 import { DashboardModule } from './dashboard/dashboard.module';
 import { ComponentsModule } from './components/components.module';
 import { HttpClientModule } from '@angular/common/http';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,12 @@ import { HttpClientModule } from '@angular/common/http';
     ComponentsModule,
     FormsModule,
     HttpClientModule,
+    ToastrModule.forRoot({
+      timeOut: 5000,
+      closeButton: true,
+      progressAnimation: 'increasing',
+      progressBar: true
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]

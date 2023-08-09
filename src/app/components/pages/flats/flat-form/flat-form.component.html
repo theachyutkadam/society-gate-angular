@@ -4,9 +4,7 @@
     <mat-accordion>
       <mat-expansion-panel-header>
         <mat-panel-title> <h4 class="mb-32">Flat</h4> </mat-panel-title>
-        <mat-action-row>
-          <button mat-button color="primary" (click)="onBack()">Back</button>
-        </mat-action-row>
+        <button mat-button color="primary" (click)="onBack()">Back</button>
       </mat-expansion-panel-header>
     </mat-accordion>
 
@@ -37,17 +35,22 @@
       </mat-form-field>
 
       <section class="fs-16 mb-32">
-        <mat-checkbox color="primary" formControlName="is_rented" [checked]="is_rented" class="d-block mb-16">Is Rented</mat-checkbox>
+        <mat-checkbox color="primary"
+          formControlName="is_rented"
+          [checked]="is_rented"
+          class="d-block mb-16"
+          (click)="toggleIsRented()">
+          Is Rented
+        </mat-checkbox>
       </section>
 
-      <mat-form-field class="w-100 fs-15" appearance="outline">
+      <mat-form-field class="w-100 fs-15" appearance="outline" *ngIf="is_rented">
         <mat-label>Select an Tenant</mat-label>
-        <mat-select formControlName="society_id">
+        <mat-select [(value)]="currentTenant" formControlName="tenant_id">
           <mat-option>Select Tenant</mat-option>
-          <mat-option *ngFor="let tenant of tenantList;" [value]="tenant.id">{{tenant.id}}</mat-option>
+          <mat-option *ngFor="let tenant of tenantList;" [value]="tenant.id">{{tenant.full_name | titlecase}}</mat-option>
         </mat-select>
       </mat-form-field>
-
 
       <mat-form-field class="w-100 fs-15" appearance="outline">
         <mat-label>Flat Structure</mat-label>

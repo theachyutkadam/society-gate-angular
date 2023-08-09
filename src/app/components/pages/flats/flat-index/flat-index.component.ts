@@ -15,7 +15,7 @@ export class FlatIndexComponent implements OnInit {
   displayedColumns: string[] = ['id', 'number', 'structure', 'is_rented', 'owner', 'tenant', 'actions'];
   // flats: any;
   dataSource: any;
-  public perPage = 10;
+  public perPage = 5;
   public currentPage = 1;
   public totalCount = 0;
   public totalPages = 0;

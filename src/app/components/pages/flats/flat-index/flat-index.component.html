@@ -1,6 +1,9 @@
 <mat-card class="w-100">
   <mat-card-content>
     <h4>Flats</h4>
+    <div mat-dialog-actions align="end">
+      <button mat-button mat-dialog-close>New</button>
+    </div>
     <div class="table-responsive">
       <table mat-table [dataSource]="dataSource" class="text-nowrap w-100">
 

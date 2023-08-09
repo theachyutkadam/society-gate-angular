@@ -5,6 +5,8 @@ import { HttpServices } from 'src/app/components/connections/services/http-servi
 import { FormBuilder, FormControl,FormGroup,Validators} from '@angular/forms';
 import { first } from 'rxjs';
 import { Session } from 'inspector';
+import { ToastrService } from 'ngx-toastr';
+import { CommonTaskService } from 'src/app/components/connections/common/common-task.service';
 
 @Component({
   selector: 'app-user-form',
@@ -26,12 +28,14 @@ export class UserFormComponent implements OnInit {
   constructor(
     private router: Router,
     private _http: HttpServices,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private toastr: ToastrService,
+    private common: CommonTaskService
   ) { }
 
   ngOnInit(): void {
-    this.initializeUserInforationForm()
     this.getUserInformations()
+    this.initializeUserInforationForm()
   }
 
   initializeUserInforationForm(){
@@ -78,6 +82,7 @@ export class UserFormComponent implements OnInit {
       },
       err => {
         console.log(err);
+        this.toastr.error(err, 'Error');
       }
     )
   }
@@ -105,18 +110,18 @@ export class UserFormComponent implements OnInit {
       "avatar_url": this.userInformationForm.value.avatar_url
     }
 
-    console.log('Check- update values-->', userInformation);
-
     this._http.put(url, userInformation).subscribe((response: any) => {
       console.warn("response", response)
       if(response['meta']['status'] == 200){
         this.updateSessionUserDetails(response['full_name'], this.user_information_id)
+        this.toastr.success("User updated successfully", 'Error');
         this.router.navigateByUrl('/users')
       }else{
-        console.log(response.errors)
+        console.log("Errors->", response)
+        this.toastr.error(response, 'Error');
       }
     },err=>{
-      console.log(err)
+      this.common.returnToastrMessages(err.error)
     })
   }
 

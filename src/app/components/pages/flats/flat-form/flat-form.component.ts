@@ -5,6 +5,8 @@ import { HttpServices } from 'src/app/components/connections/services/http-servi
 import { FormBuilder, FormControl,FormGroup,Validators} from '@angular/forms';
 import { first } from 'rxjs';
 import { Session } from 'inspector';
+import { CommonTaskService } from 'src/app/components/connections/common/common-task.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-flat-form',
@@ -19,20 +21,23 @@ export class FlatFormComponent implements OnInit {
   flat: any;
   structure: any;
   tenantList: any;
+  currentTenant: any;
   is_rented: boolean = false;
   showTenantList: boolean = true;
 
   constructor(
     private router: Router,
     private _http: HttpServices,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private toastr: ToastrService,
+    private common: CommonTaskService
   ) { }
 
   ngOnInit(): void {
     this.initializeFlatForm()
     this.getFlat()
   }
- 
+
   initializeFlatForm(){
     this.flatForm = this.fb.group({
 			electricity_meter_number: ['', Validators.required],
@@ -59,6 +64,8 @@ export class FlatFormComponent implements OnInit {
 
         this.flat = response['flat']
         this.is_rented = this.flat['is_rented']
+        this.is_rented ? this.currentTenant = this.flat['tenant']['user_information']['user']['id'] : this.currentTenant = ''
+        this.getTenantList()
         this.structure = this.flat['structure']
 
         this.flatForm.patchValue({
@@ -71,11 +78,11 @@ export class FlatFormComponent implements OnInit {
           structure: this.structure,
           floor_id: this.flat['floor']['id'],
           owner_id: this.flat['owner']['id'],
-          tenant_id: this.is_rented? this.flat['tenant']['id'] : ''
+          tenant_id: this.currentTenant
         })
       },
       err => {
-        console.log(err);
+        this.common.returnToastrMessages(err.error)
       }
     )
   }
@@ -103,27 +110,38 @@ export class FlatFormComponent implements OnInit {
     this._http.put(url, flat).subscribe((response: any) => {
       console.warn("response", response)
       if(response['meta']['status'] == 200){
+        this.toastr.success("Flat updated successfully", 'Success');
         this.router.navigateByUrl('/flats')
       }else{
-        console.log(response.errors)
+        this.common.returnToastrMessages(response.errors)
       }
     },err=>{
-      console.log(err)
+      this.common.returnToastrMessages(err.error)
     })
   }
 
-  getTenantList(event: any){
-    event.target.value ? this.showTenantList = true : this.showTenantList = false
+  toggleIsRented(){
+    if (this.is_rented){
+      this.is_rented = false
+      this.tenantList = ''
+    } else {
+      this.is_rented = true
+      this.getTenantList()
+    }
+  }
 
-    this._http.get('users')
-    .subscribe(
-      (response: any) => {
-        this.tenantList = response['users']
-      },
-      err => {
-        console.log(err);
-      }
-    )
+  getTenantList(){
+    if (this.is_rented) {
+      this._http.get('users')
+      .subscribe(
+        (response: any) => {
+          this.tenantList = response['users']
+        },
+        err => {
+          console.log(err);
+        }
+      )
+    }
   }
 
 }

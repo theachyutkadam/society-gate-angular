@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { HttpServices } from 'src/app/components/connections/services/http-services';
+import { CommonTaskService } from '../../connections/common/common-task.service';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +17,9 @@ export class LoginComponent implements OnInit {
   constructor(
     private formbuilder: FormBuilder,
     private _http: HttpServices,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService,
+    private common: CommonTaskService
   ){ }
 
   ngOnInit(): void {
@@ -32,7 +36,7 @@ export class LoginComponent implements OnInit {
       console.log("response", response)
       this.activeUsers = response['active_users']
     },err=>{
-      console.log(err)
+      this.common.returnToastrMessages(err.error)
     })
   }
 
@@ -51,6 +55,7 @@ export class LoginComponent implements OnInit {
         sessionStorage.setItem('authToken', response.auth_token)
         sessionStorage.setItem('userInformationId', response.user_information_id)
         this.loginForm.reset()
+        this.toastr.success(`Welcome ${response.user_details['full_name']}`, 'Success');
         this.router.navigateByUrl('/home')
       }else{
         console.log(response.errors)
