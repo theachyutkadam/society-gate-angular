@@ -7,6 +7,7 @@ import { first } from 'rxjs';
 import { Session } from 'inspector';
 import { CommonTaskService } from 'src/app/components/connections/common/common-task.service';
 import { ToastrService } from 'ngx-toastr';
+import {MatSliderModule} from '@angular/material/slider';
 
 @Component({
   selector: 'app-flat-form',
@@ -17,11 +18,13 @@ import { ToastrService } from 'ngx-toastr';
 export class FlatFormComponent implements OnInit {
   flatForm!: FormGroup
   flat_id = sessionStorage.getItem("selected_flat_id")
+  formName = "new"
 
   flat: any;
   structure: any;
   tenantList: any;
   currentTenant: any;
+  flatObject: any;
   is_rented: boolean = false;
   showTenantList: boolean = true;
 
@@ -35,7 +38,7 @@ export class FlatFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.initializeFlatForm()
-    this.getFlat()
+    this.formName == 'new' ? this.getFlat() : ''
   }
 
   initializeFlatForm(){
@@ -67,7 +70,7 @@ export class FlatFormComponent implements OnInit {
         this.is_rented ? this.currentTenant = this.flat['tenant']['user_information']['user']['id'] : this.currentTenant = ''
         this.getTenantList()
         this.structure = this.flat['structure']
-
+        this.formName = "edit"
         this.flatForm.patchValue({
           area_in_feet: this.flat['area_in_feet'],
           electricity_meter_number: this.flat['electricity_meter_number'],
@@ -92,9 +95,8 @@ export class FlatFormComponent implements OnInit {
     this.router.navigateByUrl('/flats')
   }
 
-  saveFlat(){
-    let url = `flats/${this.flat_id}`
-    const flat = {
+  makeFlatObject(){
+    this.flatObject = {
       "electricity_meter_number": this.flatForm.value.electricity_meter_number,
       "gas_meter_number": this.flatForm.value.gas_meter_number,
       "letter_box_number": this.flatForm.value.letter_box_number,
@@ -106,9 +108,22 @@ export class FlatFormComponent implements OnInit {
       "owner_id": this.flatForm.value.owner_id,
       "tenant_id": this.flatForm.value.tenant_id,
     }
+  }
 
-    this._http.put(url, flat).subscribe((response: any) => {
-      console.warn("response", response)
+  updateFlat(){
+    this._http.put(`flats/${this.flat_id}`, this.flatObject).subscribe((response: any) => {
+      if(response['meta']['status'] == 200){
+        this.router.navigateByUrl('/flats')
+      }else{
+        console.log(response.errors)
+      }
+    },err=>{
+      console.log(err)
+    })
+  }
+
+  createFlat(){
+    this._http.post('flats', this.flatObject).subscribe((response: any) => {
       if(response['meta']['status'] == 200){
         this.toastr.success("Flat updated successfully", 'Success');
         this.router.navigateByUrl('/flats')

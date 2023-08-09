@@ -65,6 +65,16 @@ export class FullComponent {
       menu: "Flats",
     },
     {
+      link: "/vehicles",
+      icon: "disc",
+      menu: "Vehicles",
+    },
+    {
+      link: "/gate-entries",
+      icon: "voicemail",
+      menu: "Gate Entries",
+    },
+    {
       link: "/users",
       icon: "grid",
       menu: "Users",

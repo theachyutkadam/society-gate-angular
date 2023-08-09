@@ -3,12 +3,14 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { HttpServices } from 'src/app/components/connections/services/http-services';
-
+import { MatExpansionPanel } from '@angular/material/expansion';
 
 @Component({
   selector: 'app-building-index',
   templateUrl: './building-index.component.html',
-  styleUrls: ['./building-index.component.scss']
+  styleUrls: ['./building-index.component.scss'],
+  viewProviders: [MatExpansionPanel],
+
 })
 
 export class BuildingIndexComponent implements OnInit {
@@ -66,7 +68,7 @@ export class BuildingIndexComponent implements OnInit {
   }
 
   setBuilding(building:any){
-    sessionStorage.setItem('selected_building_id', building)
+    building ? sessionStorage.setItem('selected_building_id', building) : sessionStorage.setItem('selected_building_id', '')
     this.router.navigateByUrl('/building-form')
   }
 

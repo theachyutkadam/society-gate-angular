@@ -19,6 +19,7 @@ export class BuildingFormComponent implements OnInit {
   societies: any;
   status: any
   formName: String = "new"
+  buildingObject: any
 
   constructor(
     private router: Router,
@@ -28,7 +29,7 @@ export class BuildingFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.initializeBuildingForm()
-    this.getBuildings()
+    this.getBuilding()
     this.formName == 'new' ? this.getSocieties() : ''
   }
 
@@ -52,7 +53,7 @@ export class BuildingFormComponent implements OnInit {
     )
   }
 
-  getBuildings() {
+  getBuilding() {
     let url = `buildings/${this.building_id}`
     this._http.get(url)
       .subscribe((response: any) => {
@@ -76,16 +77,29 @@ export class BuildingFormComponent implements OnInit {
     this.router.navigateByUrl('/buildings')
   }
 
-  saveBuilding(){
-    let url = `buildings/${this.building_id}`
-    const building = {
+  makeBuildingObject(){
+    this.buildingObject = {
       "name": this.buildingForm.value.name,
       "location": this.buildingForm.value.location,
       "status": this.buildingForm.value.status,
       "society_id": this.building ? this.building['society']['id'] : this.buildingForm.value.society_id
     }
+  }
 
-    this._http.put(url, building).subscribe((response: any) => {
+  updateBuilding(){
+    this._http.put(`buildings/${this.building_id}`, this.buildingObject).subscribe((response: any) => {
+      if(response['meta']['status'] == 200){
+        this.router.navigateByUrl('/buildings')
+      }else{
+        console.log(response.errors)
+      }
+    },err=>{
+      console.log(err)
+    })
+  }
+
+  createBuilding(){
+    this._http.post('buildings', this.buildingObject).subscribe((response: any) => {
       if(response['meta']['status'] == 200){
         this.router.navigateByUrl('/buildings')
       }else{

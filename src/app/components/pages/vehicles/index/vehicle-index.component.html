@@ -1,11 +1,11 @@
 <mat-card class="w-100">
   <mat-card-content>
-    <!-- <h4>Flats</h4> -->
+    <!-- <h4>Vehicles</h4> -->
     <mat-accordion>
       <mat-expansion-panel-header>
-        <mat-panel-title> <h4 class="mb-32">Flats</h4> </mat-panel-title>
+        <mat-panel-title> <h4 class="mb-32">Vehicle</h4> </mat-panel-title>
         <mat-action-row>
-          <button mat-button color="primary" (click)="setFlat('')">New</button>
+          <button mat-button color="primary" (click)="setVehicle('')">New</button>
         </mat-action-row>
       </mat-expansion-panel-header>
     </mat-accordion>
@@ -17,61 +17,60 @@
           <!-- Id Column -->
           <ng-container matColumnDef="id">
             <th mat-header-cell *matHeaderCellDef> Id </th>
-            <td mat-cell class="fw-medium" *matCellDef="let element"> <a (click)="setFlat(element.id)"> {{element.id}} </a></td>
+            <td mat-cell class="fw-medium" *matCellDef="let element"> <a (click)="setVehicle(element.id)"> {{element.id}} </a></td>
           </ng-container>
 
-          <!-- Flat_Details Column -->
-          <ng-container matColumnDef="number">
-            <th mat-header-cell *matHeaderCellDef> Flat Number </th>
+          <!-- Vehicle_Details Column -->
+          <ng-container matColumnDef="vehicle">
+            <th mat-header-cell *matHeaderCellDef> Name </th>
             <td mat-cell *matCellDef="let element">
-              <p class="mb-0 fw-medium">{{ element.number }}</p>
-              <p class="mb-0 fw-normal op-5">Floor-{{ element.floor.number }}</p>
+              <p class="mb-0 fw-medium">{{ element.name }}</p>
+              <p class="mb-0 fw-normal op-5">Number-{{ element.number }}</p>
             </td>
           </ng-container>
 
           <!-- Structure Column -->
-          <ng-container matColumnDef="structure">
-            <th mat-header-cell *matHeaderCellDef> Structure </th>
+          <ng-container matColumnDef="details">
+            <th mat-header-cell *matHeaderCellDef> Details </th>
             <td mat-cell *matCellDef="let element">
-              <p class="mb-0 fw-medium">{{ element.structure }} - BHK</p>
+              <p class="mb-0 fw-medium">{{ element.company }}</p>
+              <p class="mb-0 fw-normal op-5">Color-{{ element.color }}</p>
             </td>
           </ng-container>
 
           <!-- Is Rented Column -->
-          <ng-container matColumnDef="is_rented">
-            <th mat-header-cell *matHeaderCellDef> Is Rented </th>
+          <ng-container matColumnDef="vehicle_type">
+            <th mat-header-cell *matHeaderCellDef> Vehicle Type </th>
             <td mat-cell *matCellDef="let element">
-              <span class="badge {{ isRented(element.is_rented) }} rounded-pill">
-                {{element.is_rented}}
-              </span>
+              <p class="mb-0 fw-medium">{{element.vehicle_type }}</p>
             </td>
           </ng-container>
 
           <!-- Owner Column -->
-          <ng-container matColumnDef="owner">
-            <th mat-header-cell *matHeaderCellDef> Owner </th>
+          <ng-container matColumnDef="flat">
+            <th mat-header-cell *matHeaderCellDef> Flat </th>
             <td mat-cell *matCellDef="let element">
-              <p class="mb-0 fw-medium">{{element.owner.user_information.full_name }}</p>
+              <p class="mb-0 fw-medium">{{element.flat.letter_box_number }}</p>
             </td>
           </ng-container>
 
           <!-- Tenant Column -->
-          <ng-container matColumnDef="tenant">
+<!--           <ng-container matColumnDef="tenant">
             <th mat-header-cell *matHeaderCellDef> Tenant </th>
             <td mat-cell *matCellDef="let element">
               <p class="mb-0 fw-medium" *ngIf="element.is_rented">{{element.tenant.user_information.full_name }}</p>
               <p class="mb-0 fw-medium" *ngIf="!element.is_rented">-</p>
             </td>
           </ng-container>
-
+ -->
            <!-- Action Column -->
            <ng-container matColumnDef="actions">
             <th mat-header-cell *matHeaderCellDef> Actions </th>
             <td mat-cell class="fw-medium" *matCellDef="let element">
-              <a (click)="setFlat(element.id)" matTooltip="Edit User">
+              <a (click)="setVehicle(element.id)" matTooltip="Edit User">
                 <mat-icon>mode_edit_outline</mat-icon>
               </a>&nbsp;
-              <a (click)="setFlat(element.id)" matTooltip="Delete User">
+              <a (click)="setVehicle(element.id)" matTooltip="Delete User">
                 <mat-icon>delete_outline</mat-icon>
               </a>
             </td>
@@ -83,9 +82,6 @@
       </table>
     </div>
 
-    <!-- <mat-paginator #paginator [pageSize]="perPage" [pageSizeOptions]="[5, 10, 25, 50]" [showFirstLastButtons]="true" [length]="totalPages"
-    [pageIndex]="totalPages">
-    </mat-paginator> -->
     <mat-paginator #paginator
       [pageSize]="perPage"
       [pageSizeOptions]="[5, 10, 25, 100]"
