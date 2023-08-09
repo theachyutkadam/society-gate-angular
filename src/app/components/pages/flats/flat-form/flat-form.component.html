@@ -37,7 +37,12 @@
       </mat-form-field>
 
       <section class="fs-16 mb-32">
-        <mat-checkbox color="primary" formControlName="is_rented" [checked]="is_rented" class="d-block mb-16">Is Rented</mat-checkbox>
+        <section class="example-section">
+          <mat-slide-toggle class="example-margin" color="primary" [checked]="is_rented" (onChange)="getTenantList($event)">
+            Is Rented
+          </mat-slide-toggle>
+        </section>
+        <!-- <mat-checkbox color="primary" formControlName="is_rented" [checked]="is_rented" class="d-block mb-16">Is Rented</mat-checkbox> -->
       </section>
 
       <mat-form-field class="w-100 fs-15" appearance="outline">

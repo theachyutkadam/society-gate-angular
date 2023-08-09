@@ -118,6 +118,7 @@ export class FlatFormComponent implements OnInit {
     this._http.get('users')
     .subscribe(
       (response: any) => {
+        console.log("check users list", response)
         this.tenantList = response['users']
       },
       err => {
