@@ -10,7 +10,7 @@
       </mat-expansion-panel-header>
     </mat-accordion>
 
-    <form [formGroup]="flatForm" (ngSubmit)="saveFlat()">
+    <form [formGroup]="flatForm">
       <mat-form-field class="w-100 fs-15" appearance="outline">
         <mat-label>Electricity Meter Number</mat-label>
         <input matInput type="text" formControlName="electricity_meter_number" placeholder="123456789 *" readonly>
@@ -68,6 +68,15 @@
       <button mat-button class="btn btn-info fw-normal" type="submit">
         Submit
       </button>
+
+      <button mat-button
+        [disabled]="!flatForm.valid"
+        class="btn btn-info fw-normal"
+        (click)="updateFlat()"
+        type="submit"
+        *ngIf="formName == 'edit'">Update
+      </button>
+      <button mat-button class="btn btn-info fw-normal" [disabled]="!flatForm.valid" (click)="createFlat()" type="submit" *ngIf="formName == 'new'">Submit</button>
       <!-- <button mat-button [ngClass]="['!flatForm.valid' ? 'btn btn-light fw-normal' : 'btn btn-info fw-normal']" type="submit" [disabled]="!flatForm.valid">Submit</button> -->
     </form>
   </div>

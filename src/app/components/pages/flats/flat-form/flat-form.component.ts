@@ -16,10 +16,12 @@ import {MatSliderModule} from '@angular/material/slider';
 export class FlatFormComponent implements OnInit {
   flatForm!: FormGroup
   flat_id = sessionStorage.getItem("selected_flat_id")
+  formName = "edit"
 
   flat: any;
   structure: any;
   tenantList: any;
+  flatObject: any;
   is_rented: boolean = false;
   showTenantList: boolean = true;
 
@@ -31,9 +33,9 @@ export class FlatFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.initializeFlatForm()
-    this.getFlat()
+    this.formName == 'new' ? this.getFlat() : ''
   }
- 
+
   initializeFlatForm(){
     this.flatForm = this.fb.group({
 			electricity_meter_number: ['', Validators.required],
@@ -61,7 +63,7 @@ export class FlatFormComponent implements OnInit {
         this.flat = response['flat']
         this.is_rented = this.flat['is_rented']
         this.structure = this.flat['structure']
-
+        this.formName = "edit"
         this.flatForm.patchValue({
           area_in_feet: this.flat['area_in_feet'],
           electricity_meter_number: this.flat['electricity_meter_number'],
@@ -86,9 +88,8 @@ export class FlatFormComponent implements OnInit {
     this.router.navigateByUrl('/flats')
   }
 
-  saveFlat(){
-    let url = `flats/${this.flat_id}`
-    const flat = {
+  makeFlatObject(){
+    this.flatObject = {
       "electricity_meter_number": this.flatForm.value.electricity_meter_number,
       "gas_meter_number": this.flatForm.value.gas_meter_number,
       "letter_box_number": this.flatForm.value.letter_box_number,
@@ -100,9 +101,22 @@ export class FlatFormComponent implements OnInit {
       "owner_id": this.flatForm.value.owner_id,
       "tenant_id": this.flatForm.value.tenant_id,
     }
+  }
 
-    this._http.put(url, flat).subscribe((response: any) => {
-      console.warn("response", response)
+  updateFlat(){
+    this._http.put(`flats/${this.flat_id}`, this.flatObject).subscribe((response: any) => {
+      if(response['meta']['status'] == 200){
+        this.router.navigateByUrl('/flats')
+      }else{
+        console.log(response.errors)
+      }
+    },err=>{
+      console.log(err)
+    })
+  }
+
+  createFlat(){
+    this._http.post('flats', this.flatObject).subscribe((response: any) => {
       if(response['meta']['status'] == 200){
         this.router.navigateByUrl('/flats')
       }else{
