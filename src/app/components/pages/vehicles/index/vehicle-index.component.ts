@@ -12,7 +12,7 @@ import { MatExpansionPanel } from '@angular/material/expansion';
   viewProviders: [MatExpansionPanel]
 })
 export class VehicleIndexComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'vehicle', 'details', 'vehicle_type', 'flat', 'actions'];
+  displayedColumns: string[] = ['id', 'vehicle', 'details', 'status', 'vehicle_type', 'flat', 'actions'];
   // vehicles: any;
   dataSource: any;
   public perPage = 10;
@@ -45,6 +45,22 @@ export class VehicleIndexComponent implements OnInit {
         console.log(err);
       }
     )
+  }
+
+  checkStatus(status: any){
+    if(status == "active"){
+      return "btn-success"
+    }
+    if(status == "pending"){
+      return "btn-warning"
+    }
+    if(status == "blocked"){
+      return "btn-secondary"
+    }
+    if(status == "deleted"){
+      return "btn-danger"
+    }
+    return "btn-primary"
   }
 
   setVehicle(vehicle:any){
