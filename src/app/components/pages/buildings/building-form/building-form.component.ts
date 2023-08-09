@@ -77,22 +77,36 @@ export class BuildingFormComponent implements OnInit {
   }
 
   saveBuilding(){
-    let url = `buildings/${this.building_id}`
-    const building = {
+    let url = this.formName == 'new' ? 'buildings' : `buildings/${this.building_id}`
+    const buildingObject = {
       "name": this.buildingForm.value.name,
       "location": this.buildingForm.value.location,
       "status": this.buildingForm.value.status,
       "society_id": this.building ? this.building['society']['id'] : this.buildingForm.value.society_id
     }
 
-    this._http.put(url, building).subscribe((response: any) => {
-      if(response['meta']['status'] == 200){
-        this.router.navigateByUrl('/buildings')
-      }else{
-        console.log(response.errors)
-      }
-    },err=>{
-      console.log(err)
-    })
+    if (this.formName == 'new'){
+      this._http.post(url, buildingObject).subscribe((response: any) => {
+        console.log("crete response", response)
+        if(response['meta']['status'] == 200){
+          this.router.navigateByUrl('/buildings')
+        }else{
+          console.log(response.errors)
+        }
+      },err=>{
+        console.log(err)
+      })
+    }else{
+      this._http.put(url, buildingObject).subscribe((response: any) => {
+        if(response['meta']['status'] == 200){
+          this.router.navigateByUrl('/buildings')
+        }else{
+          console.log(response.errors)
+        }
+      },err=>{
+        console.log(err)
+      })
+    }
+
   }
 }

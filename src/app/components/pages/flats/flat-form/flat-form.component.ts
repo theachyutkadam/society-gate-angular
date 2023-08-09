@@ -5,6 +5,7 @@ import { HttpServices } from 'src/app/components/connections/services/http-servi
 import { FormBuilder, FormControl,FormGroup,Validators} from '@angular/forms';
 import { first } from 'rxjs';
 import { Session } from 'inspector';
+import {MatSliderModule} from '@angular/material/slider';
 
 @Component({
   selector: 'app-flat-form',
