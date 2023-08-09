@@ -4,11 +4,12 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Action } from 'rxjs/internal/scheduler/Action';
 import { HttpServices } from 'src/app/components/connections/services/http-services';
-
+import { MatExpansionPanel } from '@angular/material/expansion';
 @Component({
   selector: 'app-flat-index',
   templateUrl: './flat-index.component.html',
-  styleUrls: ['./flat-index.component.scss']
+  styleUrls: ['./flat-index.component.scss'],
+  viewProviders: [MatExpansionPanel]
 })
 
 export class FlatIndexComponent implements OnInit {
@@ -57,7 +58,7 @@ export class FlatIndexComponent implements OnInit {
   }
 
   setFlat(flat:any){
-    sessionStorage.setItem('selected_flat_id', flat)
+    flat ? sessionStorage.setItem('selected_flat_id', flat) : sessionStorage.setItem('selected_flat_id', '')
     this.router.navigateByUrl('/flat-form')
   }
 
