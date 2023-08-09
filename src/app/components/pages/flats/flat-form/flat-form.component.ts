@@ -16,7 +16,7 @@ import {MatSliderModule} from '@angular/material/slider';
 export class FlatFormComponent implements OnInit {
   flatForm!: FormGroup
   flat_id = sessionStorage.getItem("selected_flat_id")
-  formName = "edit"
+  formName = "new"
 
   flat: any;
   structure: any;
