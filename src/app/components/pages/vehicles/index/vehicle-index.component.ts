@@ -15,7 +15,7 @@ export class VehicleIndexComponent implements OnInit {
   displayedColumns: string[] = ['id', 'vehicle', 'details', 'status', 'vehicle_type', 'flat', 'actions'];
   // vehicles: any;
   dataSource: any;
-  public perPage = 10;
+  public perPage = 5;
   public currentPage = 1;
   public totalCount = 0;
   public totalPages = 0;
