@@ -91,6 +91,7 @@ export class BuildingFormComponent implements OnInit {
   }
 
   updateBuilding(){
+    this.makeBuildingObject()
     this._http.put(`buildings/${this.building_id}`, this.buildingObject).subscribe((response: any) => {
       if(response['meta']['status'] == 200){
         this.toastr.success("Building updated successfully", 'Success');
@@ -107,6 +108,7 @@ export class BuildingFormComponent implements OnInit {
   }
 
   createBuilding(){
+    this.makeBuildingObject()
     this._http.post('buildings', this.buildingObject).subscribe((response: any) => {
       if(response['meta']['status'] == 200){
         this.router.navigateByUrl('/buildings')
