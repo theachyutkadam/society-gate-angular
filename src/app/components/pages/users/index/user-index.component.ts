@@ -15,8 +15,8 @@ export class UserIndexComponent implements OnInit {
   displayedColumns: string[] = ['id', 'full_name', 'user_details', 'status', 'maritial_status', 'user_type', 'actions'];
   dataSource: any;
 
-  public perPage = 10;
-  public currentPage = 1;
+  public perPage = 5;
+  public currentPage = 0;
   public totalCount = 0;
   public totalPages = 0;
 
@@ -32,7 +32,7 @@ export class UserIndexComponent implements OnInit {
     this.getUserInformations()
   }
 
-  getUserInformations(per_page: number = 10, current_page: number = 0) {
+  getUserInformations(per_page: number = this.perPage, current_page: number = this.currentPage) {
     let params = [
       { key: "page", value: current_page},
       { key: "per_page", value: per_page }

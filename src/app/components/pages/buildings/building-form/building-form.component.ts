@@ -3,6 +3,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatExpansionPanel } from '@angular/material/expansion';
 import { HttpServices } from 'src/app/components/connections/services/http-services';
+import { ToastrService } from 'ngx-toastr';
+import { CommonTaskService } from 'src/app/components/connections/common/common-task.service';
 
 @Component({
   selector: 'app-building-form',
@@ -24,7 +26,9 @@ export class BuildingFormComponent implements OnInit {
   constructor(
     private router: Router,
     private _http: HttpServices,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private toastr: ToastrService,
+    private common: CommonTaskService
   ) { }
 
   ngOnInit(): void {
@@ -73,7 +77,7 @@ export class BuildingFormComponent implements OnInit {
   }
 
   onBack(){
-    sessionStorage.setItem('selected_building_id', "0")
+    sessionStorage.removeItem('selected_building_id')
     this.router.navigateByUrl('/buildings')
   }
 
@@ -89,12 +93,16 @@ export class BuildingFormComponent implements OnInit {
   updateBuilding(){
     this._http.put(`buildings/${this.building_id}`, this.buildingObject).subscribe((response: any) => {
       if(response['meta']['status'] == 200){
+        this.toastr.success("Building updated successfully", 'Success');
         this.router.navigateByUrl('/buildings')
       }else{
-        console.log(response.errors)
+        console.log("call success", response.errors)
+        this.toastr.error(response, 'Error');
       }
     },err=>{
-      console.log(err)
+      this.toastr.error("Something went wrong!", 'Error');
+      console.log("No call", err.error)
+      this.common.returnToastrMessages(err.error)
     })
   }
 

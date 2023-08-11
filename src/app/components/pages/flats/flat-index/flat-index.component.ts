@@ -58,7 +58,7 @@ export class FlatIndexComponent implements OnInit {
   }
 
   setFlat(flat:any){
-    flat ? sessionStorage.setItem('selected_flat_id', flat) : sessionStorage.setItem('selected_flat_id', '')
+    flat ? sessionStorage.setItem('selected_flat_id', flat) : sessionStorage.removeItem('selected_flat_id')
     this.router.navigateByUrl('/flat-form')
   }
 
