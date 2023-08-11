@@ -64,7 +64,7 @@ export class VehicleIndexComponent implements OnInit {
   }
 
   setVehicle(vehicle:any){
-    vehicle ? sessionStorage.setItem('selected_vehicle_id', vehicle) : sessionStorage.setItem('selected_vehicle_id', '')
+    vehicle ? sessionStorage.setItem('selected_vehicle_id', vehicle) : sessionStorage.removeItem('selected_vehicle_id')
     // this.router.navigateByUrl('/vehicle-form')
   }
 

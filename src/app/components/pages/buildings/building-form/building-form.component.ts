@@ -77,7 +77,7 @@ export class BuildingFormComponent implements OnInit {
   }
 
   onBack(){
-    sessionStorage.setItem('selected_building_id', "0")
+    sessionStorage.removeItem('selected_building_id')
     this.router.navigateByUrl('/buildings')
   }
 

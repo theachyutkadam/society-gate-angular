@@ -88,7 +88,7 @@ export class UserFormComponent implements OnInit {
   }
 
   onBack(){
-    sessionStorage.setItem('selected_user_id', "0")
+    sessionStorage.removeItem('selected_user_id')
     this.router.navigateByUrl('/users')
   }
 

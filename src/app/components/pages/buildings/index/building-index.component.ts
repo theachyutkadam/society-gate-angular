@@ -68,7 +68,7 @@ export class BuildingIndexComponent implements OnInit {
   }
 
   setBuilding(building:any){
-    building ? sessionStorage.setItem('selected_building_id', building) : sessionStorage.setItem('selected_building_id', '')
+    building ? sessionStorage.setItem('selected_building_id', building) : sessionStorage.removeItem('selected_building_id')
     this.router.navigateByUrl('/building-form')
   }
 

@@ -91,7 +91,7 @@ export class FlatFormComponent implements OnInit {
   }
 
   onBack(){
-    sessionStorage.setItem('selected_flat_id', "0")
+    sessionStorage.removeItem('selected_flat_id')
     this.router.navigateByUrl('/flats')
   }
 
