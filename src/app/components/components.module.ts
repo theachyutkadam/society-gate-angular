@@ -34,6 +34,7 @@ import { FlatIndexComponent } from './pages/flats/flat-index/flat-index.componen
 import { FlatFormComponent } from './pages/flats/flat-form/flat-form.component';
 
 import { VehicleIndexComponent } from './pages/vehicles/index/vehicle-index.component';
+import { VehicleFormComponent } from './pages/vehicles/vehicle-form/vehicle-form.component';
 import { GateEntriesIndexComponent } from './pages/gate-entries/index/gate-entries-index.component';
 
 @NgModule({
@@ -63,6 +64,7 @@ import { GateEntriesIndexComponent } from './pages/gate-entries/index/gate-entri
         FlatIndexComponent,
         FlatFormComponent,
         VehicleIndexComponent,
+        VehicleFormComponent,
         GateEntriesIndexComponent
     ],
     exports: [

@@ -30,6 +30,7 @@ import { UserFormComponent } from './components/pages/users/user-form/user-form.
 import { FlatIndexComponent } from './components/pages/flats/flat-index/flat-index.component'
 import { FlatFormComponent } from './components/pages/flats/flat-form/flat-form.component'
 import { VehicleIndexComponent } from './components/pages/vehicles/index/vehicle-index.component'
+import { VehicleFormComponent } from './components/pages/vehicles/vehicle-form/vehicle-form.component'
 import { GateEntriesIndexComponent } from './components/pages/gate-entries/index/gate-entries-index.component'
 
 const routes: Routes = [
@@ -66,7 +67,10 @@ const routes: Routes = [
       {path:"building-form", component:BuildingFormComponent, canActivate:[AuthGuard]},
       {path:"flats", component:FlatIndexComponent, canActivate:[AuthGuard]},
       {path:"flat-form", component:FlatFormComponent, canActivate:[AuthGuard]},
+
       {path:"vehicles", component:VehicleIndexComponent, canActivate:[AuthGuard]},
+      {path:"vehicle-form", component:VehicleFormComponent, canActivate:[AuthGuard]},
+
       {path:"gate-entries", component:GateEntriesIndexComponent, canActivate:[AuthGuard]},
     ]
   },

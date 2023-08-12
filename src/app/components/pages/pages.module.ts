@@ -12,6 +12,7 @@ import { BuildingFormComponent } from './buildings/building-form/building-form.c
 import { BuildingIndexComponent } from './buildings/index/building-index.component';
 import { VehicleIndexComponent } from './vehicles/index/vehicle-index.component';
 import { GateEntriesIndexComponent } from './gate-entries/index/gate-entries-index.component';
+import { VehicleFormComponent } from './vehicles/vehicle-form/vehicle-form.component';
 
 @NgModule({
   declarations: [
@@ -23,9 +24,11 @@ import { GateEntriesIndexComponent } from './gate-entries/index/gate-entries-ind
     // UserFormComponent,
     // BuildingIndexComponent,
     // BuildingFormComponent
-  
+
     // VehicleIndexComponent,
     // GateEntriesIndexComponent
+
+    // VehicleFormComponent
   ],
   imports: [
     CommonModule,
