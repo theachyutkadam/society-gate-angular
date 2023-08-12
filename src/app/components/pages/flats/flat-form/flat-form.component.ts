@@ -16,6 +16,7 @@ import {MatSliderModule} from '@angular/material/slider';
   viewProviders: [MatExpansionPanel]
 })
 export class FlatFormComponent implements OnInit {
+
   flatForm!: FormGroup
   flat_id = sessionStorage.getItem("selected_flat_id")
   formName = "new"
@@ -38,7 +39,13 @@ export class FlatFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.initializeFlatForm()
-    this.formName == 'new' ? this.getFlat() : ''
+    if (this.flat_id){
+      this.getFlat()
+      this.formName = "edit"
+    }else{
+      this.formName = "new"
+    }
+
   }
 
   initializeFlatForm(){
@@ -64,13 +71,11 @@ export class FlatFormComponent implements OnInit {
     let url = `flats/${this.flat_id}`
     this._http.get(url)
       .subscribe((response: any) => {
-
         this.flat = response['flat']
         this.is_rented = this.flat['is_rented']
         this.is_rented ? this.currentTenant = this.flat['tenant']['user_information']['user']['id'] : this.currentTenant = ''
         this.getTenantList()
         this.structure = this.flat['structure']
-        this.formName = "edit"
         this.flatForm.patchValue({
           area_in_feet: this.flat['area_in_feet'],
           electricity_meter_number: this.flat['electricity_meter_number'],
@@ -111,21 +116,26 @@ export class FlatFormComponent implements OnInit {
   }
 
   updateFlat(){
+    this.makeFlatObject()
     this._http.put(`flats/${this.flat_id}`, this.flatObject).subscribe((response: any) => {
       if(response['meta']['status'] == 200){
+        this.toastr.success("Flat updated successfully", 'Success');
         this.router.navigateByUrl('/flats')
       }else{
+        this.common.returnToastrMessages(response.errors)
         console.log(response.errors)
       }
     },err=>{
       console.log(err)
+      this.common.returnToastrMessages(err.error)
     })
   }
 
   createFlat(){
+    this.makeFlatObject()
     this._http.post('flats', this.flatObject).subscribe((response: any) => {
       if(response['meta']['status'] == 200){
-        this.toastr.success("Flat updated successfully", 'Success');
+        this.toastr.success("Flat created successfully", 'Success');
         this.router.navigateByUrl('/flats')
       }else{
         this.common.returnToastrMessages(response.errors)
@@ -137,9 +147,11 @@ export class FlatFormComponent implements OnInit {
 
   toggleIsRented(){
     if (this.is_rented){
+      console.log('true');
       this.is_rented = false
       this.tenantList = ''
     } else {
+      console.log('false');
       this.is_rented = true
       this.getTenantList()
     }

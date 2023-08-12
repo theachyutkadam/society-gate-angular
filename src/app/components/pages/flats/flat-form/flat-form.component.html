@@ -43,12 +43,12 @@
           (click)="toggleIsRented()">
           Is Rented
         </mat-checkbox> -->
-        <section class="example-section">
-          <mat-slide-toggle class="example-margin" color="primary" [checked]="is_rented" (click)="toggleIsRented()">
+        <!-- <section class="example-section">
+          <mat-slide-toggle class="example-margin" color="primary" [checked]="is_rented" (click)="toggleIsRented($event)">
             Is Rented
           </mat-slide-toggle>
-        </section>
-        <!-- <mat-checkbox color="primary" formControlName="is_rented" [checked]="is_rented" class="d-block mb-16">Is Rented</mat-checkbox> -->
+        </section> -->
+        <mat-checkbox color="primary" formControlName="is_rented" [checked]="is_rented" class="d-block mb-16">Is Rented</mat-checkbox>
       </section>
 
       <mat-form-field class="w-100 fs-15" appearance="outline" *ngIf="is_rented">
@@ -69,15 +69,20 @@
         </mat-select>
       </mat-form-field>
 
-      <button mat-button
+      <!-- <button mat-button
         [disabled]="!flatForm.valid"
         class="btn btn-info fw-normal"
         (click)="updateFlat()"
         type="submit"
         *ngIf="formName == 'edit'">Update
-      </button>
-      <button mat-button class="btn btn-info fw-normal" [disabled]="!flatForm.valid" (click)="createFlat()" type="submit" *ngIf="formName == 'new'">Submit</button>
-      <!-- <button mat-button [ngClass]="['!flatForm.valid' ? 'btn btn-light fw-normal' : 'btn btn-info fw-normal']" type="submit" [disabled]="!flatForm.valid">Submit</button> -->
+      </button> -->
+
+      <div *ngIf="formName == 'new'; else elseBlock">
+        <button mat-button class="btn btn-info fw-normal" (click)="createFlat()" type="submit">Submit</button>
+      </div>
+      <ng-template #elseBlock>
+        <button mat-button class="btn btn-info fw-normal" (click)="updateFlat()" type='submit'>Update</button>
+      </ng-template>
     </form>
   </div>
 </div>

@@ -121,6 +121,7 @@ export class UserFormComponent implements OnInit {
         this.toastr.error(response, 'Error');
       }
     },err=>{
+      this.toastr.error(err.error, 'Error');
       this.common.returnToastrMessages(err.error)
     })
   }
