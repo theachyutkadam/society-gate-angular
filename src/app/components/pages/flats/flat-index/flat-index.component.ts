@@ -20,6 +20,8 @@ export class FlatIndexComponent implements OnInit {
   public currentPage = 1;
   public totalCount = 0;
   public totalPages = 0;
+  column = "created_at"
+  order_by = "asc"
 
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
 
@@ -32,13 +34,15 @@ export class FlatIndexComponent implements OnInit {
   getFlats(per_page: number = this.perPage, current_page: number = this.currentPage) {
     let params = [
       { key: "page", value: current_page},
-      { key: "per_page", value: per_page }
+      { key: "per_page", value: per_page },
+      { key: "column", value: this.column },
+      { key: "order_by", value: this.order_by }
     ]
     this._http.get('flats', params)
     .subscribe(
       (response: any) => {
         console.warn("response", response)
-        // this.dataSource = new MatTableDataSource<any>(response);
+        this.order_by == "asc" ? this.order_by = "desc" : this.order_by = "asc"
         this.dataSource = new MatTableDataSource<any>(response['flats']);
         this.totalCount = response['meta']['total_count']
         this.totalPages = response['meta']['total_pages']
@@ -62,9 +66,16 @@ export class FlatIndexComponent implements OnInit {
     this.router.navigateByUrl('/flat-form')
   }
 
+  sortBy(column: string = this.column, order_by: string = this.order_by){
+    this.column = column
+    this.order_by = order_by
+    this.getFlats(this.perPage, this.currentPage)
+  }
+
   // Handle pagination
   changePage(event: PageEvent) {
-    console.log('Check--->', event);
+    this.perPage = event.pageSize
+    this.currentPage = event.pageIndex
     this.getFlats(event.pageSize, event.pageIndex)
   }
 }
