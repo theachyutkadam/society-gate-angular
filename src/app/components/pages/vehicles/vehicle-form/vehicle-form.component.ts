@@ -25,9 +25,14 @@ export class VehicleFormComponent implements OnInit {
   status: any;
   vehicle_type: any;
   color = "black";
-  flatList: any;
   currentFlat: any;
   vehicleObject: any;
+
+  // Following Variable use for select flat
+  buildingsList: any
+  wingsList: any
+  floorsList: any
+  flatsList: any;
 
   constructor(
     private router: Router,
@@ -38,6 +43,7 @@ export class VehicleFormComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.getBuildingList()
     this.initializeVehicleForm()
     if (this.vehicle_id){
       this.getVehicle()
@@ -60,7 +66,79 @@ export class VehicleFormComponent implements OnInit {
     })
   }
 
+  getBuildingList(){
+    this._http.get('buildings', '')
+    .subscribe(
+      (response: any) => {
+        console.warn("response", response)
+        this.buildingsList = response['buildings']
+      },
+      err => {
+        console.log(err);
+      }
+    )
+  }
 
+  getWings(event: any){
+    let params = [
+      { key: "building_id", value: event.value }
+    ]
+    this._http.get('wings', params)
+    .subscribe(
+      (response: any) => {
+        console.warn("response", response)
+        if(response['wings'].length == 0){
+          this.toastr.warning("No data found, Please select another builiding", 'Warning');
+          return
+        }
+        this.wingsList = response['wings']
+      },
+      err => {
+        console.log(err);
+      }
+    )
+  }
+
+  getFloors(event: any){
+    let params = [
+      { key: "wing_id", value: event.value }
+    ]
+    this._http.get('floors', params)
+    .subscribe(
+      (response: any) => {
+        console.warn("response", response)
+        if(response['floors'].length == 0){
+          this.toastr.warning("No data found, Please select another wing", 'Warning');
+          return
+        }
+
+        this.floorsList = response['floors']
+      },
+      err => {
+        console.log(err);
+      }
+    )
+  }
+
+  getFlats(event: any){
+    let params = [
+      { key: "floor_id", value: event.value }
+    ]
+    this._http.get('flats', params)
+    .subscribe(
+      (response: any) => {
+        console.warn("response", response)
+        this.flatsList = response['flats']
+      },
+      err => {
+        console.log(err);
+      }
+    )
+  }
+
+  setCurrentFlat(event: any){
+    this.currentFlat = event.value
+  }
   getVehicle() {
     let url = `vehicles/${this.vehicle_id}`
     this._http.get(url)
@@ -68,6 +146,7 @@ export class VehicleFormComponent implements OnInit {
         console.log('Check- Vehicle-->', response);
         this.vehicle = response['vehicle']
         this.currentFlat = this.vehicle['flat']['id']
+        this.flatsList = [this.vehicle['flat']]
         this.status = this.vehicle['status']
         this.color = this.vehicle['color']
         this.vehicle_type = this.vehicle['vehicle_type']
@@ -142,7 +221,7 @@ export class VehicleFormComponent implements OnInit {
   //   if (this.is_rented){
   //     console.log('true');
   //     this.is_rented = false
-  //     this.flatList = ''
+  //     this.flatsList = ''
   //   } else {
   //     console.log('false');
   //     this.is_rented = true
@@ -155,7 +234,7 @@ export class VehicleFormComponent implements OnInit {
   //     this._http.get('users')
   //     .subscribe(
   //       (response: any) => {
-  //         this.flatList = response['users']
+  //         this.flatsList = response['users']
   //       },
   //       err => {
   //         console.log(err);

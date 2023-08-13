@@ -9,70 +9,100 @@
     </mat-accordion>
 
     <form [formGroup]="vehicleForm">
-      <mat-form-field class="w-100 fs-15" appearance="outline">
-        <mat-label>Color</mat-label>
-        <!-- <input [(colorPicker)]="color" [style.background]="color"/> -->
-        <input matInput type="text" formControlName="color" placeholder="Orange">
-      </mat-form-field>
+
+      <span *ngIf="formName == 'new'">
+        <mat-form-field class="w-100 fs-15" appearance="outline">
+          <mat-label>Select an Building</mat-label>
+          <mat-select buildingList (selectionChange)="getWings($event)">
+            <mat-option>Select Building</mat-option>
+            <mat-option *ngFor="let building of buildingsList;" [value]="building.id">{{building.name | titlecase}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="w-100 fs-15" appearance="outline">
+          <mat-label>Select an Wing</mat-label>
+          <mat-select wingsList (selectionChange)="getFloors($event)">
+            <mat-option>Select Wing</mat-option>
+            <mat-option *ngFor="let wing of wingsList;" [value]="wing.id">{{wing.name | titlecase}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="w-100 fs-15" appearance="outline">
+          <mat-label>Select an Floor</mat-label>
+          <mat-select floorsList (selectionChange)="getFlats($event)">
+            <mat-option>Select Floor</mat-option>
+            <mat-option *ngFor="let floor of floorsList;" [value]="floor.id">{{floor.number}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </span>
 
       <mat-form-field class="w-100 fs-15" appearance="outline">
-        <mat-label>Company</mat-label>
-        <input matInput type="text" formControlName="company" placeholder="KTM">
-      </mat-form-field>
-
-      <mat-form-field class="w-100 fs-15" appearance="outline">
-        <mat-label>Name</mat-label>
-        <input matInput type="text" formControlName="name" placeholder="390 Adventure">
-      </mat-form-field>
-
-      <mat-form-field class="w-100 fs-15" appearance="outline">
-        <mat-label>Number</mat-label>
-        <input matInput type="text" formControlName="number" placeholder="4907">
-      </mat-form-field>
-
-      <mat-form-field class="w-100 fs-15" appearance="outline">
-        <mat-label>Select an Status</mat-label>
-        <mat-select [(value)]="status" formControlName="status">
-          <mat-option>Select Status</mat-option>
-          <mat-option value="active">Active</mat-option>
-          <mat-option value="blocked">Blocked</mat-option>
-          <mat-option value="deleted">Deleted</mat-option>
-          <mat-option value="pending">Pending</mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <!-- <mat-form-field class="w-100 fs-15" appearance="outline">
         <mat-label>Select an Flat</mat-label>
-        <mat-select [(value)]="currentFlat" formControlName="flat_id">
+        <mat-select [(value)]="currentFlat" formControlName="flat_id" (selectionChange)="setCurrentFlat($event)">
           <mat-option>Select Flat</mat-option>
-          <mat-option *ngFor="let flat of flatList;" [value]="flat.id">{{flat.number}}</mat-option>
-        </mat-select>
-      </mat-form-field> -->
-
-      <mat-form-field class="w-100 fs-15" appearance="outline">
-        <mat-label>Select an type</mat-label>
-        <mat-select [(value)]="vehicle_type" formControlName="vehicle_type">
-          <mat-option>Select type</mat-option>
-          <mat-option value="bike">Bike</mat-option>
-          <mat-option value="car">Car</mat-option>
-          <mat-option value="other">Other</mat-option>
+          <mat-option *ngFor="let flat of flatsList;" [value]="flat.id">{{flat.number}}</mat-option>
         </mat-select>
       </mat-form-field>
 
-      <!-- <button mat-button
-        [disabled]="!vehicleForm.valid"
-        class="btn btn-info fw-normal"
-        (click)="updateVehicle()"
-        type="submit"
-        *ngIf="formName == 'edit'">Update
-      </button> -->
+      <span *ngIf="currentFlat">
 
-      <div *ngIf="formName == 'new'; else elseBlock">
-        <button mat-button class="btn btn-info fw-normal" (click)="createVehicle()" type="submit">Submit</button>
-      </div>
-      <ng-template #elseBlock>
-        <button mat-button class="btn btn-info fw-normal" (click)="updateVehicle()" type='submit'>Update</button>
-      </ng-template>
+        <mat-form-field class="w-100 fs-15" appearance="outline">
+          <mat-label>Color</mat-label>
+          <!-- <input [(colorPicker)]="color" [style.background]="color"/> -->
+          <input matInput type="text" formControlName="color" placeholder="Orange">
+        </mat-form-field>
+
+        <mat-form-field class="w-100 fs-15" appearance="outline">
+          <mat-label>Company</mat-label>
+          <input matInput type="text" formControlName="company" placeholder="KTM">
+        </mat-form-field>
+
+        <mat-form-field class="w-100 fs-15" appearance="outline">
+          <mat-label>Name</mat-label>
+          <input matInput type="text" formControlName="name" placeholder="390 Adventure">
+        </mat-form-field>
+
+        <mat-form-field class="w-100 fs-15" appearance="outline">
+          <mat-label>Number</mat-label>
+          <input matInput type="text" formControlName="number" placeholder="4907">
+        </mat-form-field>
+
+        <mat-form-field class="w-100 fs-15" appearance="outline">
+          <mat-label>Select an Status</mat-label>
+          <mat-select [(value)]="status" formControlName="status">
+            <mat-option>Select Status</mat-option>
+            <mat-option value="active">Active</mat-option>
+            <mat-option value="blocked">Blocked</mat-option>
+            <mat-option value="deleted">Deleted</mat-option>
+            <mat-option value="pending">Pending</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="w-100 fs-15" appearance="outline">
+          <mat-label>Select an type</mat-label>
+          <mat-select [(value)]="vehicle_type" formControlName="vehicle_type">
+            <mat-option>Select type</mat-option>
+            <mat-option value="bike">Bike</mat-option>
+            <mat-option value="car">Car</mat-option>
+            <mat-option value="other">Other</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- <button mat-button
+          [disabled]="!vehicleForm.valid"
+          class="btn btn-info fw-normal"
+          (click)="updateVehicle()"
+          type="submit"
+          *ngIf="formName == 'edit'">Update
+        </button> -->
+
+        <div *ngIf="formName == 'new'; else elseBlock">
+          <button mat-button class="btn btn-info fw-normal" (click)="createVehicle()" type="submit">Submit</button>
+        </div>
+        <ng-template #elseBlock>
+          <button mat-button class="btn btn-info fw-normal" (click)="updateVehicle()" type='submit'>Update</button>
+        </ng-template>
+      </span>
     </form>
   </div>
 </div>

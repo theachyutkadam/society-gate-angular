@@ -11,7 +11,6 @@ export class AppComponent implements OnInit {
   show_header: boolean = false
 
   ngOnInit(){
-  	console.log("testig app ts file ng")
   	if(sessionStorage.getItem('authToken')){
   	  this.show_header = true
   	}
