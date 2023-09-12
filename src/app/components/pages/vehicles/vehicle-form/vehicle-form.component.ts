@@ -139,6 +139,7 @@ export class VehicleFormComponent implements OnInit {
   setCurrentFlat(event: any){
     this.currentFlat = event.value
   }
+
   getVehicle() {
     let url = `vehicles/${this.vehicle_id}`
     this._http.get(url)

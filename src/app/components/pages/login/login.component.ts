@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { HttpServices } from 'src/app/components/connections/services/http-services';
 import { CommonTaskService } from '../../connections/common/common-task.service';
+import { AuthService } from '../../connections/shared/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -19,12 +20,20 @@ export class LoginComponent implements OnInit {
     private _http: HttpServices,
     private router: Router,
     private toastr: ToastrService,
-    private common: CommonTaskService
+    private common: CommonTaskService,
+    private auth: AuthService
   ){ }
 
   ngOnInit(): void {
+
+    console.log('Check--login before->');
+    if (this.auth.IsloggedIn()){
+      console.log('Check--login after iff->');
+      this.router.navigateByUrl('/home')
+    }
+
     this.loginForm = this.formbuilder.group({
-      email: [''],
+      email: ['', Validators.required],
       password: ['', Validators.required]
     })
 
@@ -35,6 +44,11 @@ export class LoginComponent implements OnInit {
     this._http.health().subscribe((response: any) => {
       console.log("response", response)
       this.activeUsers = response['active_users']
+      this.loginForm.patchValue({
+        email: this.activeUsers[0],
+        password: "123456"
+      })
+
     },err=>{
       this.common.returnToastrMessages(err.error)
     })
@@ -51,12 +65,12 @@ export class LoginComponent implements OnInit {
 
       if(response.status == 200){
         sessionStorage.setItem('userDetails', response.user_details['full_name'])
-        sessionStorage.setItem('userId', response.user_details['user_id'])
+        sessionStorage.setItem('userId', response.user_id)
         sessionStorage.setItem('authToken', response.auth_token)
         sessionStorage.setItem('userInformationId', response.user_information_id)
         this.loginForm.reset()
         this.toastr.success(`Welcome ${response.user_details['full_name']}`, 'Success');
-        this.router.navigateByUrl('/home')
+        this.router.navigateByUrl('/')
       }else{
         console.log(response.errors)
       }

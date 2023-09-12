@@ -9,25 +9,61 @@
     </mat-accordion>
 
     <form [formGroup]="flatForm">
-      <mat-form-field class="w-100 fs-15" appearance="outline">
-        <mat-label>Electricity Meter Number</mat-label>
-        <input matInput type="text" formControlName="electricity_meter_number" placeholder="123456789 *" readonly>
-      </mat-form-field>
+      <span *ngIf="formName == 'new'">
+        <mat-form-field class="w-100 fs-15" appearance="outline">
+          <mat-label>Select an Building</mat-label>
+          <mat-select buildingList (selectionChange)="getWings($event)">
+            <mat-option>Select Building</mat-option>
+            <mat-option *ngFor="let building of buildingsList;" [value]="building.id">{{building.name | titlecase}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="w-100 fs-15" appearance="outline">
+          <mat-label>Select an Wing</mat-label>
+          <mat-select wingsList (selectionChange)="getFloors($event)">
+            <mat-option>Select Wing</mat-option>
+            <mat-option *ngFor="let wing of wingsList;" [value]="wing.id">{{wing.name | titlecase}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="w-100 fs-15" appearance="outline">
+          <mat-label>Select an Floor</mat-label>
+          <mat-select floorsList (selectionChange)="getFlats($event)">
+            <mat-option>Select Floor</mat-option>
+            <mat-option *ngFor="let floor of floorsList;" [value]="floor.id">{{floor.number}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </span>
 
       <mat-form-field class="w-100 fs-15" appearance="outline">
-        <mat-label>Gas Meter Number</mat-label>
-        <input matInput type="text" formControlName="gas_meter_number" placeholder="123456789" readonly>
+        <mat-label>Select an Flat</mat-label>
+        <mat-select [(value)]="currentFlat" (selectionChange)="setCurrentFlat($event)">
+          <mat-option>Select Flat</mat-option>
+          <mat-option *ngFor="let flat of flatsList;" [value]="flat.id">{{flat.number}}</mat-option>
+        </mat-select>
       </mat-form-field>
 
-      <mat-form-field class="w-100 fs-15" appearance="outline">
-        <mat-label>Letter Box Number</mat-label>
-        <input matInput type="text" formControlName="letter_box_number" placeholder="123456789" readonly>
-      </mat-form-field>
+      <span *ngIf="formName == 'edit'">
+        <mat-form-field class="w-100 fs-15" appearance="outline">
+          <mat-label>Electricity Meter Number</mat-label>
+          <input matInput type="text" formControlName="electricity_meter_number" placeholder="123456789 *" readonly>
+        </mat-form-field>
 
-      <mat-form-field class="w-100 fs-15" appearance="outline">
-        <mat-label>Number</mat-label>
-        <input matInput type="text" formControlName="number" placeholder="123456789" readonly>
-      </mat-form-field>
+        <mat-form-field class="w-100 fs-15" appearance="outline">
+          <mat-label>Gas Meter Number</mat-label>
+          <input matInput type="text" formControlName="gas_meter_number" placeholder="123456789" readonly>
+        </mat-form-field>
+
+        <mat-form-field class="w-100 fs-15" appearance="outline">
+          <mat-label>Letter Box Number</mat-label>
+          <input matInput type="text" formControlName="letter_box_number" placeholder="123456789" readonly>
+        </mat-form-field>
+
+        <mat-form-field class="w-100 fs-15" appearance="outline">
+          <mat-label>Number</mat-label>
+          <input matInput type="text" formControlName="number" placeholder="123456789" readonly>
+        </mat-form-field>
+      </span>
 
       <mat-form-field class="w-100 fs-15" appearance="outline">
         <mat-label>Area In Feet</mat-label>
@@ -43,12 +79,12 @@
           (click)="toggleIsRented()">
           Is Rented
         </mat-checkbox> -->
-        <!-- <section class="example-section">
-          <mat-slide-toggle class="example-margin" color="primary" [checked]="is_rented" (click)="toggleIsRented($event)">
+        <section class="example-section">
+          <mat-slide-toggle class="example-margin" color="primary" [checked]="is_rented" (click)="toggleIsRented()">
             Is Rented
           </mat-slide-toggle>
-        </section> -->
-        <mat-checkbox color="primary" formControlName="is_rented" [checked]="is_rented" class="d-block mb-16">Is Rented</mat-checkbox>
+        </section>
+        <!-- <mat-checkbox color="primary" formControlName="is_rented" [checked]="is_rented" class="d-block mb-16">Is Rented</mat-checkbox> -->
       </section>
 
       <mat-form-field class="w-100 fs-15" appearance="outline" *ngIf="is_rented">

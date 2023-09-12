@@ -29,6 +29,13 @@ export class FlatFormComponent implements OnInit {
   is_rented: boolean = false;
   showTenantList: boolean = true;
 
+  // Following Variable use for select flat
+  buildingsList: any
+  wingsList: any
+  floorsList: any
+  flatsList: any;
+  currentFlat: any;
+
   constructor(
     private router: Router,
     private _http: HttpServices,
@@ -44,6 +51,7 @@ export class FlatFormComponent implements OnInit {
       this.formName = "edit"
     }else{
       this.formName = "new"
+      this.getBuildingList()
     }
 
   }
@@ -58,7 +66,6 @@ export class FlatFormComponent implements OnInit {
 			is_rented: ['', Validators.required],
 			structure: ['', Validators.required],
 			floor_id: ['', Validators.required],
-			owner_id: ['', Validators.required],
 			tenant_id: ['', Validators.required],
     })
     // if (this.showHandicapBox){
@@ -66,9 +73,86 @@ export class FlatFormComponent implements OnInit {
     // }
   }
 
+  getBuildingList(){
+    this._http.get('buildings', '')
+    .subscribe(
+      (response: any) => {
+        console.warn("response", response)
+        this.buildingsList = response['buildings']
+      },
+      err => {
+        console.log(err);
+      }
+    )
+  }
+
+  getWings(event: any){
+    let params = [
+      { key: "building_id", value: event.value }
+    ]
+    this._http.get('wings', params)
+    .subscribe(
+      (response: any) => {
+        console.warn("response", response)
+        if(response['wings'].length == 0){
+          this.toastr.warning("No data found, Please select another builiding", 'Warning');
+          return
+        }
+        this.wingsList = response['wings']
+      },
+      err => {
+        console.log(err);
+      }
+    )
+  }
+
+  getFloors(event: any){
+    let params = [
+      { key: "wing_id", value: event.value }
+    ]
+    this._http.get('floors', params)
+    .subscribe(
+      (response: any) => {
+        console.warn("response", response)
+        if(response['floors'].length == 0){
+          this.toastr.warning("No data found, Please select another wing", 'Warning');
+          return
+        }
+
+        this.floorsList = response['floors']
+      },
+      err => {
+        console.log(err);
+      }
+    )
+  }
+
+  getFlats(event: any){
+    let params = [
+      { key: "floor_id", value: event.value }
+    ]
+    this._http.get('flats', params)
+    .subscribe(
+      (response: any) => {
+        console.warn("response", response)
+        this.flatsList = response['flats']
+      },
+      err => {
+        console.log(err);
+      }
+    )
+  }
+
+  setCurrentFlat(event: any){
+    this.currentFlat = event.value
+  }
 
   getFlat() {
+    console.log('Check--->', this.flat_id);
     let url = `flats/${this.flat_id}`
+    // let params = [
+    //   { key: "floor_id", value: event.value }
+    // ]
     this._http.get(url)
       .subscribe((response: any) => {
         this.flat = response['flat']
@@ -147,11 +231,9 @@ export class FlatFormComponent implements OnInit {
 
   toggleIsRented(){
     if (this.is_rented){
-      console.log('true');
       this.is_rented = false
       this.tenantList = ''
     } else {
-      console.log('false');
       this.is_rented = true
       this.getTenantList()
     }

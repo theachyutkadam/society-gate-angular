@@ -13,7 +13,6 @@ import { MatExpansionPanel } from '@angular/material/expansion';
 })
 export class VehicleIndexComponent implements OnInit {
   displayedColumns: string[] = ['id', 'vehicle', 'details', 'status', 'vehicle_type', 'flat', 'actions'];
-  // vehicles: any;
   dataSource: any;
   public perPage = 5;
   public currentPage = 1;
@@ -36,7 +35,7 @@ export class VehicleIndexComponent implements OnInit {
     this._http.get('vehicles', params)
     .subscribe(
       (response: any) => {
-        console.warn("response", response)
+        console.info("response", response)
         this.dataSource = new MatTableDataSource<any>(response['vehicles']);
         this.totalCount = response['meta']['total_count']
         this.totalPages = response['meta']['total_pages']

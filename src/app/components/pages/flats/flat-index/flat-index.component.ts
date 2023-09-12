@@ -28,6 +28,7 @@ export class FlatIndexComponent implements OnInit {
   constructor(private router: Router, private _http: HttpServices) { }
 
   ngOnInit(): void {
+    sessionStorage.removeItem('selected_flat_id')
     this.getFlats()
   }
 
