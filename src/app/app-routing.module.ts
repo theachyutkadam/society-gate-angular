@@ -62,7 +62,7 @@ const routes: Routes = [
       {path:"logout", component:LogoutComponent},
 
       {path:"users", component:UserIndexComponent, canActivate:[AuthGuard]},
-      {path:"user-form", component:UserFormComponent, canActivate:[AuthGuard]},
+      {path:"user-form/:user_id", component:UserFormComponent, canActivate:[AuthGuard]},
       {path:"buildings", component:BuildingIndexComponent, canActivate:[AuthGuard]},
       {path:"building-form", component:BuildingFormComponent, canActivate:[AuthGuard]},
       {path:"flats", component:FlatIndexComponent, canActivate:[AuthGuard]},

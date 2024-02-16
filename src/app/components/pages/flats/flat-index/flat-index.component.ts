@@ -42,14 +42,14 @@ export class FlatIndexComponent implements OnInit {
     this._http.get('flats', params)
     .subscribe(
       (response: any) => {
-        console.warn("response", response)
+        console.log("response", response)
         this.order_by == "asc" ? this.order_by = "desc" : this.order_by = "asc"
         this.dataSource = new MatTableDataSource<any>(response['flats']);
         this.totalCount = response['meta']['total_count']
         this.totalPages = response['meta']['total_pages']
       },
       err => {
-        console.log(err);
+        console.error(err);
       }
     )
   }

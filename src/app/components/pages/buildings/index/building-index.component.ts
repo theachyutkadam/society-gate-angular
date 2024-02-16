@@ -44,14 +44,14 @@ export class BuildingIndexComponent implements OnInit {
     this._http.get('buildings', params)
     .subscribe(
       (response: any) => {
-        console.warn("response", response)
+        console.log("response", response)
         this.order_by == "asc" ? this.order_by = "desc" : this.order_by = "asc"
         this.dataSource = new MatTableDataSource<any>(response['buildings']);
         this.totalCount = response['meta']['total_count']
         this.totalPages = response['meta']['total_pages']
       },
       err => {
-        console.log(err);
+        console.error(err);
       }
     )
   }

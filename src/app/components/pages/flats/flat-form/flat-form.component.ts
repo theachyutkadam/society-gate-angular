@@ -230,16 +230,17 @@ export class FlatFormComponent implements OnInit {
   }
 
   toggleIsRented(){
-    if (this.is_rented){
-      this.is_rented = false
-      this.tenantList = ''
-    } else {
-      this.is_rented = true
-      this.getTenantList()
-    }
+    this.is_rented ? this.tenantList = '' : this.getTenantList()
+    this.is_rented = !this.is_rented
   }
 
   getTenantList(){
+    let params = [
+      { key: "page", value: 1},
+      { key: "per_page", value: 1000 },
+      // { key: "column", value: this.column },
+      // { key: "order_by", value: this.order_by }
+    ]
     if (this.is_rented) {
       this._http.get('users')
       .subscribe(

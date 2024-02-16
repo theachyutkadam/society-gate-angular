@@ -82,16 +82,11 @@
 
       <picture>
         <input type="file" class="file-upload" (change)="setAvatar($event)">
-        <source media='(min-width:0px)' [attr.width]="'200px'" [attr.height]="'200px'"
+        <source media='(min-width:0px)' width="200px" height="200px"
         [srcset]="userInformation.avatar_url">
         <img mat-card-image src="" alt="No avatar">
       </picture><br><br>
 
-<!--       <mat-form-field class="w-100 fs-15" appearance="outline">
-        <mat-label>Error</mat-label>
-        <input matInput type="text" value="Deep Javiya">
-      </mat-form-field>
- -->
       <button mat-button class="btn btn-info fw-normal" type="submit">
         Submit
       </button>

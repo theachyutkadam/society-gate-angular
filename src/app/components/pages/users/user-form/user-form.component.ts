@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { MatExpansionPanel } from '@angular/material/expansion';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpServices } from 'src/app/components/connections/services/http-services';
-import { FormBuilder, FormControl,FormGroup,Validators} from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { first } from 'rxjs';
 import { Session } from 'inspector';
 import { ToastrService } from 'ngx-toastr';
 import { CommonTaskService } from 'src/app/components/connections/common/common-task.service';
+import { Location } from '@angular/common';
+
 
 @Component({
   selector: 'app-user-form',
@@ -30,13 +32,17 @@ export class UserFormComponent implements OnInit {
     private _http: HttpServices,
     private fb: FormBuilder,
     private toastr: ToastrService,
-    private common: CommonTaskService
+    private common: CommonTaskService,
+    private _activated_route: ActivatedRoute,
+    private location: Location
   ) { }
 
   ngOnInit(): void {
-    this.getUserInformations()
+    this.getUserInformations(this._activated_route.snapshot.paramMap.get('user_id'))
     this.initializeUserInforationForm()
   }
+
+  onBack(){this.location.back()}
 
   initializeUserInforationForm(){
     this.userInformationForm = this.fb.group({
@@ -58,8 +64,8 @@ export class UserFormComponent implements OnInit {
     }
   }
 
-  getUserInformations() {
-    let url = `user_informations/${this.user_information_id}`
+  getUserInformations(user_id: any) {
+    let url = `user_informations/${user_id}`
     this._http.get(url)
       .subscribe((response: any) => {
 
@@ -85,11 +91,6 @@ export class UserFormComponent implements OnInit {
         this.toastr.error(err, 'Error');
       }
     )
-  }
-
-  onBack(){
-    sessionStorage.removeItem('selected_user_id')
-    this.router.navigateByUrl('/users')
   }
 
   saveUserInformation(){
@@ -125,14 +126,6 @@ export class UserFormComponent implements OnInit {
       this.common.returnToastrMessages(err.error)
     })
   }
-
-  // seRadioBtnValue(field:any, object:any){
-  //   if (field == "maritial_status"){
-  //     this.maritial_status = object.value
-  //   }else{
-  //     this.gender = object.value
-  //   }
-  // }
 
   setAvatar(event: any) {
     console.log('Check--->', event.target.files[0]);

@@ -25,7 +25,6 @@ export class LoginComponent implements OnInit {
   ){ }
 
   ngOnInit(): void {
-
     console.log('Check--login before->');
     if (this.auth.IsloggedIn()){
       console.log('Check--login after iff->');
@@ -72,10 +71,10 @@ export class LoginComponent implements OnInit {
         this.toastr.success(`Welcome ${response.user_details['full_name']}`, 'Success');
         this.router.navigateByUrl('/')
       }else{
-        console.log(response.errors)
+        console.error(response.errors)
       }
     },err=>{
-      console.log(err)
+      console.error(err)
     })
   }
 }

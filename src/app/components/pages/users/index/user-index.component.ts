@@ -12,7 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 
 export class UserIndexComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'full_name', 'user_details', 'status', 'maritial_status', 'user_type', 'actions'];
+  displayedColumns: string[] = ['id', 'full_name', 'user_details', 'status', 'avatar', 'maritial_status', 'user_type', 'actions'];
   dataSource: any;
 
   public perPage = 5;
@@ -68,9 +68,8 @@ export class UserIndexComponent implements OnInit {
     return "btn-primary"
   }
 
-  setUser(user:any){
-    sessionStorage.setItem('selected_user_id', user)
-    this.router.navigateByUrl('/user-form')
+  editUser(user_id:any){
+    this.router.navigateByUrl(`/user-form/${user_id}`)
   }
 
   // Handle pagination
