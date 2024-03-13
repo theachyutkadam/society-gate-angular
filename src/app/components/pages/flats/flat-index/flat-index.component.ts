@@ -13,7 +13,7 @@ import { MatExpansionPanel } from '@angular/material/expansion';
 })
 
 export class FlatIndexComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'number', 'structure', 'is_rented', 'owner', 'tenant', 'actions'];
+  displayedColumns: string[] = ['id', 'number', 'structure', 'owner', 'tenant', 'actions'];
   // flats: any;
   dataSource: any;
   public perPage = 5;

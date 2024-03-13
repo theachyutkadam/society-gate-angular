@@ -53,10 +53,10 @@
           <ng-container matColumnDef="actions">
             <th mat-header-cell *matHeaderCellDef> Actions </th>
             <td mat-cell class="fw-medium" *matCellDef="let element">
-              <a (click)="setBuilding(element.id)" matTooltip="Edit User">
+              <a (click)="setBuilding(element.id)" matTooltip="Edit Building">
                 <mat-icon>mode_edit_outline</mat-icon>
               </a>&nbsp;
-              <a (click)="setBuilding(element.id)" matTooltip="Delete User">
+              <a (click)="deleteBuilding(element.id)" matTooltip="Delete Building">
                 <mat-icon>delete_outline</mat-icon>
               </a>
             </td>

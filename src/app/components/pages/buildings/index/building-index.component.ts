@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { HttpServices } from 'src/app/components/connections/services/http-services';
 import { MatExpansionPanel } from '@angular/material/expansion';
 import { Columns } from 'angular-feather/icons';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-building-index',
@@ -28,7 +29,11 @@ export class BuildingIndexComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
 
-  constructor(private router: Router, private _http: HttpServices) { }
+  constructor(
+    private router: Router,
+    private _http: HttpServices,
+    private toastr: ToastrService
+  ) { }
 
   ngOnInit(): void {
     this.getBuildings()
@@ -81,6 +86,20 @@ export class BuildingIndexComponent implements OnInit {
     this.column = column
     this.order_by = order_by
     this.getBuildings(this.perPage, this.currentPage)
+  }
+
+  deleteBuilding(building_id: any) {
+    this._http.delete(`buildings/${building_id}`)
+    .subscribe(
+      (response: any) => {
+        this.toastr.success('Building deleted successfully');
+        this.getBuildings()
+      },
+      err => {
+        console.log(err);
+        this.toastr.error(err, 'Error');
+      }
+    )
   }
 
   // Handle pagination

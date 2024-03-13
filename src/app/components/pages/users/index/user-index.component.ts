@@ -72,9 +72,22 @@ export class UserIndexComponent implements OnInit {
     this.router.navigateByUrl(`/user-form/${user_id}`)
   }
 
+  deleteUser(user_id: any) {
+    this._http.delete(`user_informations/${user_id}`)
+    .subscribe(
+      (response: any) => {
+        this.toastr.success('User deleted successfully');
+        this.getUserInformations()
+      },
+      err => {
+        console.log(err);
+        this.toastr.error(err, 'Error');
+      }
+    )
+  }
+
   // Handle pagination
   changePage(event: PageEvent) {
-    console.log('Check--->', event);
     this.getUserInformations(event.pageSize, event.pageIndex)
   }
 }

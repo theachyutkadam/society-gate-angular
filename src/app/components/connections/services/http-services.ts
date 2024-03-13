@@ -35,6 +35,10 @@ export class HttpServices {
     return this._http.put(`${api_base_url}${url}`, obj, {headers: this.httpHeaderWithToken})
   }
 
+  delete(url: any){
+    return this._http.delete(`${api_base_url}${url}`, {headers: this.httpHeaderWithToken})
+  }
+
   post(url: any, obj: any){
     return this._http.post(`${api_base_url}${url}`, obj, {headers: this.httpHeaderWithToken})
   }

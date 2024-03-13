@@ -25,18 +25,19 @@ export class LoginComponent implements OnInit {
   ){ }
 
   ngOnInit(): void {
-    console.log('Check--login before->');
     if (this.auth.IsloggedIn()){
-      console.log('Check--login after iff->');
       this.router.navigateByUrl('/home')
+    } else {
+      this.initializeLoginForm()
+      this.collectUsers()
     }
+  }
 
+  initializeLoginForm(){
     this.loginForm = this.formbuilder.group({
       email: ['', Validators.required],
       password: ['', Validators.required]
     })
-
-    this.collectUsers()
   }
 
   collectUsers(){
@@ -69,7 +70,8 @@ export class LoginComponent implements OnInit {
         sessionStorage.setItem('userInformationId', response.user_information_id)
         this.loginForm.reset()
         this.toastr.success(`Welcome ${response.user_details['full_name']}`, 'Success');
-        this.router.navigateByUrl('/')
+        // this.router.navigateByUrl('/')
+        window.location.reload()
       }else{
         console.error(response.errors)
       }

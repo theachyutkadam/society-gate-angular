@@ -24,14 +24,17 @@ export class LogoutComponent implements OnInit {
 
   logoutFromBackend(){
     this._http.get('users/logout').subscribe((response: any) => {
-      if(response.status == 200){
-      	sessionStorage.clear()
-      	this.toastr.success("Successfully Logout", 'Success');
-      	this.router.navigate(['/login'])
-      }
+      this.resetAuthentication()
     },err=>{
       console.log(err)
+      this.resetAuthentication()
     })
+  }
+
+  resetAuthentication() {
+    sessionStorage.clear()
+    this.toastr.success("Successfully Logout", 'Success');
+    this.router.navigate(['/login'])
   }
 
 }
