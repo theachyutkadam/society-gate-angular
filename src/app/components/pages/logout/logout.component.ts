@@ -27,11 +27,13 @@ export class LogoutComponent implements OnInit {
       if(response.status == 200){
       	sessionStorage.clear()
       	this.toastr.success("Successfully Logout", 'Success');
-      	this.router.navigate(['/login'])
+        // window.location.reload()
+        this.router.navigate(['/login'])
       }
     },err=>{
       console.log(err)
     })
+    // this.router.navigate(['/login'])
   }
 
 }

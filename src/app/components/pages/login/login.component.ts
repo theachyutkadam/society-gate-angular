@@ -25,18 +25,16 @@ export class LoginComponent implements OnInit {
   ){ }
 
   ngOnInit(): void {
-    console.log('Check--login before->');
+    console.log('login Status->', this.auth.IsloggedIn());
     if (this.auth.IsloggedIn()){
-      console.log('Check--login after iff->');
-      this.router.navigateByUrl('/home')
+      this.router.navigateByUrl('/')
+    }else{
+      this.loginForm = this.formbuilder.group({
+        email: ['', Validators.required],
+        password: ['', Validators.required]
+      })
+      this.collectUsers()
     }
-
-    this.loginForm = this.formbuilder.group({
-      email: ['', Validators.required],
-      password: ['', Validators.required]
-    })
-
-    this.collectUsers()
   }
 
   collectUsers(){
@@ -63,12 +61,14 @@ export class LoginComponent implements OnInit {
       console.warn("response", response)
 
       if(response.status == 200){
+        sessionStorage.clear()
         sessionStorage.setItem('userDetails', response.user_details['full_name'])
-        sessionStorage.setItem('userId', response.user_id)
+        sessionStorage.setItem('userId', response.user_details['user_id'])
         sessionStorage.setItem('authToken', response.auth_token)
-        sessionStorage.setItem('userInformationId', response.user_information_id)
+        sessionStorage.setItem('userInformationId', response.user_details['user_information_id'])
         this.loginForm.reset()
         this.toastr.success(`Welcome ${response.user_details['full_name']}`, 'Success');
+        window.location.reload()
         this.router.navigateByUrl('/')
       }else{
         console.error(response.errors)

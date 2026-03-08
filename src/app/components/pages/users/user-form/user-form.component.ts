@@ -42,7 +42,7 @@ export class UserFormComponent implements OnInit {
     this.initializeUserInforationForm()
   }
 
-  onBack(){this.location.back()}
+  back(){this.location.back()}
 
   initializeUserInforationForm(){
     this.userInformationForm = this.fb.group({

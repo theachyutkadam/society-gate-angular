@@ -4,7 +4,6 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { HttpServices } from 'src/app/components/connections/services/http-services';
-
 @Component({
   selector: 'app-gate-entries-index',
   templateUrl: './gate-entries-index.component.html',
@@ -26,7 +25,7 @@ export class GateEntriesIndexComponent implements OnInit {
   constructor(
     private router: Router,
     private _http: HttpServices,
-    private toastr: ToastrService
+    private toastr: ToastrService,
   ) { }
 
   ngOnInit(): void {

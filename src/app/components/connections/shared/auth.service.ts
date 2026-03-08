@@ -8,6 +8,6 @@ export class AuthService {
   constructor() { }
 
   IsloggedIn(){
-    return !!sessionStorage.getItem('authToken')
+    return sessionStorage.getItem('authToken')? true : false
   }
 }

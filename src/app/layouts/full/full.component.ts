@@ -3,6 +3,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/components/connections/shared/auth.service';
 
 interface sidebarMenu {
   link: string;
@@ -19,8 +20,7 @@ export class FullComponent {
   userDetails = sessionStorage.getItem("userDetails")
   userInformationId = sessionStorage.getItem("userInformationId")
 
-  search: boolean = false;
-  show_header = false;
+  show_sidebar = false;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -28,12 +28,15 @@ export class FullComponent {
       shareReplay()
   );
 
-  constructor(private router: Router, private breakpointObserver: BreakpointObserver) { }
+  constructor(
+    private router: Router,
+    private auth: AuthService,
+    private breakpointObserver: BreakpointObserver
+  ) { }
 
   ngOnit(){
-    if(sessionStorage.getItem('authToken')){
-      this.show_header = true
-    }
+    console.log('Check--full comp->', this.auth.IsloggedIn());
+    this.show_sidebar = this.auth.IsloggedIn()
   }
 
   routerActive: string = "activelink";

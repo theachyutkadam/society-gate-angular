@@ -8,6 +8,7 @@ import { Session } from 'inspector';
 import { CommonTaskService } from 'src/app/components/connections/common/common-task.service';
 import { ToastrService } from 'ngx-toastr';
 import {MatSliderModule} from '@angular/material/slider';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-flat-form',
@@ -41,8 +42,11 @@ export class FlatFormComponent implements OnInit {
     private _http: HttpServices,
     private fb: FormBuilder,
     private toastr: ToastrService,
-    private common: CommonTaskService
+    private common: CommonTaskService,
+    private location: Location
   ) { }
+
+  back(){this.location.back()}
 
   ngOnInit(): void {
     this.initializeFlatForm()
@@ -177,11 +181,6 @@ export class FlatFormComponent implements OnInit {
         this.common.returnToastrMessages(err.error)
       }
     )
-  }
-
-  onBack(){
-    sessionStorage.removeItem('selected_flat_id')
-    this.router.navigateByUrl('/flats')
   }
 
   makeFlatObject(){
